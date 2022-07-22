@@ -14,7 +14,18 @@ Status InitSiList_Head(SiList *L) {
 }
 
 
-Status DestroySiList_Head(SiList *L) {}
+Status DestroySiList_Head(SiList *L) {
+    if (*L == NULL) {
+        return false;
+    }
+    SiLNode *p;
+    while (*L != NULL) {
+        p = *L;
+        *L = (*L)->next;
+        free(p);
+    }
+    return true;
+}
 
 
 Status SiList_Head_Head_Insert(SiList L, ElemType e) {
@@ -106,7 +117,17 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 2:     // Destroy
-
+                if (L == NULL) {
+                    printf("The list is already NULL!\n");
+                }
+                else {
+                    if (DestroySiList_Head(&L)) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
                 break;
             case 3:     // Insert a node from head
                 if (L == NULL) {
@@ -157,15 +178,19 @@ void silinklist_head_menu(void) {
                 }
                 else {
                     if (!SiList_Head_Traverse(L, visit)) {
-                        printf("Failed.\n");
+                        printf("Failed!\n");
                     }
                 }
                 break;
             default:
-                printf("Wrong input, please re-enter.\n");
+                printf("Wrong input, please re-enter!\n");
                 break;
         }
     } while (choice != 0);
+    // release memory
+    if (L != NULL) {
+        DestroySiList_Head(&L);
+    }
 }
 
 

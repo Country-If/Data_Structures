@@ -31,7 +31,7 @@ int main() {
 
                 break;
             default:
-                printf("Wrong input, please re-enter.\n");
+                printf("Wrong input, please re-enter!\n");
                 break;
         }
     } while (choice != 0);
