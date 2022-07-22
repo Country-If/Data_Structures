@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <windows.h>
 
 #ifndef DATA_STRUCTURES_MAIN_H
@@ -12,10 +13,26 @@
 typedef int ElemType;
 
 /* enumerate function return status */
-typedef enum Status
-{
+typedef enum Status {
     false,
     true
 } Status;
+
+/*!
+ * Visit a node and print its value
+ * @param e : the data of the node visited
+ */
+void visit(ElemType e);
+
+/*!
+ * Prevent users from entering other characters indiscriminately, and standardize user input of integers
+ * @return the legal integer
+ */
+int judge_int(void);
+
+/*!
+ * The main menu
+ */
+void main_menu(void);
 
 #endif //DATA_STRUCTURES_MAIN_H
