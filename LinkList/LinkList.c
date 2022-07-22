@@ -3,12 +3,12 @@
 //
 
 #include "LinkList.h"
-#include "SiLinkList_Head.h"
-#include "SiLinkList_noHead.h"
-#include "DoLinkList.h"
-#include "CirSiLinkList.h"
-#include "CirDoLinkList.h"
-#include "StaLinkList.h"
+#include "SiLinkList_Head.h"        // single linked list (with a head node)
+#include "SiLinkList_noHead.h"      // single linked list (without a head node)
+#include "DoLinkList.h"             // double linked list
+#include "CirSiLinkList.h"          // circular single linked list
+#include "CirDoLinkList.h"          // circular double linked list
+#include "StaLinkList.h"            // static linked list
 
 void linklist_menu(void) {
     int choice = 0;
