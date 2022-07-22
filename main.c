@@ -1,14 +1,6 @@
 #include "main.h"
 
-/* Linked List */
-#include "LinkList/LinkList.h"
-#include "LinkList/SiLinkList_Head.h"
-#include "LinkList/SiLinkList_noHead.h"
-#include "LinkList/DoLinkList.h"
-#include "LinkList/CirSiLinkList.h"
-#include "LinkList/CirDoLinkList.h"
-#include "LinkList/StaLinkList.h"
-
+#include "LinkList/LinkList.h"      // Linked List
 
 int main() {
     int choice = 0;

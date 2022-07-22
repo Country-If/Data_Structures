@@ -3,7 +3,7 @@
 // Name: single linked list with a head node
 //
 
-#include "../main.h"
+#include "LinkList.h"
 
 #ifndef DATA_STRUCTURES_SILINKLIST_HEAD_H
 #define DATA_STRUCTURES_SILINKLIST_HEAD_H
@@ -116,5 +116,15 @@ Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e);
  * @param visit : function pointer to a function that prints the data of a node
  */
 void SiList_Head_Traverse(SiList L, void(*visit)(ElemType e));
+
+/*!
+ * The single linked list (with a head node) menu
+ */
+void silinklist_head_menu(void);
+
+/*!
+ * The single linked list (with a head node) menu details
+ */
+void silinklist_head_menu_show_details(void);
 
 #endif //DATA_STRUCTURES_SILINKLIST_HEAD_H

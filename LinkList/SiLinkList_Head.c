@@ -45,3 +45,67 @@ Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {}
 
 
 void SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {}
+
+
+void silinklist_head_menu(void) {
+    int choice = 0;
+    do {
+        silinklist_head_menu_show_details();
+        choice = judge_int();
+        system("cls");
+        switch (choice) {
+            case 0:     // exit
+                break;
+            case 1:     //
+
+                break;
+            case 2:     //
+
+                break;
+            case 3:     //
+
+                break;
+            case 4:     //
+
+                break;
+            case 5:     //
+
+                break;
+            case 6:     //
+
+                break;
+            default:
+                printf("Wrong input, please re-enter.\n");
+                break;
+        }
+    } while (choice != 0);
+}
+
+
+void silinklist_head_menu_show_details(void) {
+    printf("\n");
+    printf("\t**************************************************\n");
+    printf("\t*      Single Linked List (with a head node)     *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  1  |   Initialize                             *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  2  |   Destroy                                *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  3  |   Insert a node from head                *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  4  |   Insert a node from tail                *\n");
+    printf("\t*-------------------------- ---------------------*\n");
+    printf("\t*  5  |   Insert a node by order                 *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  6  |   Delete a node by order                 *\n");
+    printf("\t*--------------------------- --------------------*\n");
+    printf("\t*  7  |   Delete a node by value                 *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  8  |   Update a node by order                 *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  9  |   Update a node by value                 *\n");
+    printf("\t*------------------------------------------------*\n");
+    printf("\t*  0  |   Exit                                   *\n");
+    printf("\t**************************************************\n");
+    printf("\nPlease enter the corresponding number(0-9): ");
+}

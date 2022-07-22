@@ -3,6 +3,12 @@
 //
 
 #include "LinkList.h"
+#include "SiLinkList_Head.h"
+#include "SiLinkList_noHead.h"
+#include "DoLinkList.h"
+#include "CirSiLinkList.h"
+#include "CirDoLinkList.h"
+#include "StaLinkList.h"
 
 void linklist_menu(void) {
     int choice = 0;
@@ -14,16 +20,22 @@ void linklist_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // single linked list (with a head node)
+                silinklist_head_menu();
                 break;
             case 2:     // single linked list (without a head node)
+
                 break;
             case 3:     // double linked list
+
                 break;
             case 4:     // circular single linked list
+
                 break;
             case 5:     // circular double linked list
+
                 break;
             case 6:     // static linked list
+
                 break;
             default:
                 printf("Wrong input, please re-enter.\n");
