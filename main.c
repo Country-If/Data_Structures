@@ -1,6 +1,7 @@
 #include "main.h"
 
 /* Linked List */
+#include "LinkList/LinkList.h"
 #include "LinkList/SiLinkList_Head.h"
 #include "LinkList/SiLinkList_noHead.h"
 #include "LinkList/DoLinkList.h"
@@ -17,18 +18,25 @@ int main() {
         system("cls");
         switch (choice) {
             case 0:     // exit
+
                 break;
             case 1:     // array
+
                 break;
             case 2:     // linked list
+                linklist_menu();
                 break;
             case 3:     // stack
+
                 break;
             case 4:     // queue
+
                 break;
             case 5:     // tree
+
                 break;
             case 6:     // map
+
                 break;
             default:
                 printf("Wrong input, please re-enter.\n");
