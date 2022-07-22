@@ -36,17 +36,28 @@ int main() {
         }
     } while (choice != 0);
 
-    system("pause");
+//    system("pause");
     return 0;
 }
 
 
 void visit(ElemType e) {
     if (sizeof(e) == sizeof(char)) {
-        printf("%c\t", e);
+        printf("%c -> ", e);
     }
     else if (sizeof(e) == sizeof(int)) {
-        printf("%d\t", e);
+        printf("%d -> ", e);
+    }
+}
+
+
+void get_input_element(ElemType *e) {
+    printf("Please input: ");
+    if (sizeof((*e)) == sizeof(char)) {
+        scanf("%c", e);
+    }
+    else if (sizeof((*e)) == sizeof(int)) {
+        scanf("%d", e);
     }
 }
 

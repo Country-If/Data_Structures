@@ -25,6 +25,12 @@ typedef enum Status {
 void visit(ElemType e);
 
 /*!
+ * Get element from input
+ * @param e : pointer to the element
+ */
+void get_input_element(ElemType *e);
+
+/*!
  * Prevent users from entering other characters indiscriminately, and standardize user input of integers
  * @return the legal integer
  */
