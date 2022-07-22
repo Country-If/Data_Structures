@@ -114,8 +114,9 @@ Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e);
  * Traverse the single linked list (with a head node)
  * @param L : pointer to a single linked list
  * @param visit : function pointer to a function that prints the data of a node
+ * @return status (true, false)
  */
-void SiList_Head_Traverse(SiList L, void(*visit)(ElemType e));
+Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e));
 
 /*!
  * The single linked list (with a head node) menu

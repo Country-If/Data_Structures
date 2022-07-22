@@ -21,7 +21,7 @@ Status SiList_Head_Head_Insert(SiList L, ElemType e) {
     if (L == NULL) {
         return false;
     }
-    SiLNode *p = (SiLNode *)malloc(sizeof(SiLNode));
+    SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
     if (p == NULL) {
         return false;
     }
@@ -32,7 +32,23 @@ Status SiList_Head_Head_Insert(SiList L, ElemType e) {
 }
 
 
-Status SiList_Head_Tail_Insert(SiList L, ElemType e) {}
+Status SiList_Head_Tail_Insert(SiList L, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+    SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
+    if (p == NULL) {
+        return false;
+    }
+    SiLNode *t = L;
+    while (t->next != NULL) {
+        t = t->next;
+    }
+    p->data = e;
+    p->next = t->next;
+    t->next = p;
+    return true;
+}
 
 
 Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {}
@@ -56,13 +72,17 @@ Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {}
 Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {}
 
 
-void SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
+Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
+    if (L == NULL) {
+        return false;
+    }
     SiList p = L->next;
     while (p != NULL) {
         visit(p->data);
         p = p->next;
     }
     printf("NULL\n");
+    return true;
 }
 
 
@@ -103,7 +123,18 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 4:     // Insert a node from tail
-
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_input_element(&e);
+                    if (SiList_Head_Tail_Insert(L, e)) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
                 break;
             case 5:     // Insert a node by order
 
@@ -121,7 +152,14 @@ void silinklist_head_menu(void) {
 
                 break;
             case 10:    // Traverse the list
-                SiList_Head_Traverse(L, visit);
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    if (!SiList_Head_Traverse(L, visit)) {
+                        printf("Failed.\n");
+                    }
+                }
                 break;
             default:
                 printf("Wrong input, please re-enter.\n");
