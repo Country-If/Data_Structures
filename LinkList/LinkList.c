@@ -62,7 +62,7 @@ void linklist_menu_show_details(void) {
     printf("\t*----------------------------------------------------*\n");
     printf("\t*  6  |   Static linked list                         *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  0  |   Exit                                       *\n");
+    printf("\t*  0  |   Back                                       *\n");
     printf("\t******************************************************\n");
     printf("\nPlease enter the corresponding number(0-6): ");
 }

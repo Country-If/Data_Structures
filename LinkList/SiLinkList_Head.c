@@ -219,7 +219,7 @@ void silinklist_head_menu_show_details(void) {
     printf("\t*------------------------------------------------*\n");
     printf("\t*  10 |   Traverse the list                      *\n");
     printf("\t*------------------------------------------------*\n");
-    printf("\t*  0  |   Exit                                   *\n");
+    printf("\t*  0  |   Back                                   *\n");
     printf("\t**************************************************\n");
     printf("\nPlease enter the corresponding number(0-10): ");
 }

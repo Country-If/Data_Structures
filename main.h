@@ -32,7 +32,7 @@ void get_input_element(ElemType *e);
 
 /*!
  * Prevent users from entering other characters indiscriminately, and standardize user input of integers
- * @return the legal integer
+ * @return the legitimate integer
  */
 int judge_int(void);
 
