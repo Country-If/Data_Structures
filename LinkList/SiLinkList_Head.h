@@ -67,7 +67,7 @@ Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p);
 /*!
  * Delete a node of a single linked list (with a head node) by order
  * @param L : pointer to a single linked list
- * @param i : the order of a specific node, legitimate range: [1, n + 1]
+ * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be deleted
  * @return status (true, false)
  */
@@ -85,10 +85,10 @@ SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e);
 /*!
  * Retrieve a node of a single linked list (with a head node) by order
  * @param L : pointer to a single linked list
- * @param i : the order of a specific node, legitimate range: [1, n + 1]
+ * @param i : the order of a specific node, legitimate range: [1, n]
  * @return pointer to the result node if successfully retrieved else NULL
  */
-SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i);
+SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt);
 
 /* Update */
 /*!
@@ -103,7 +103,7 @@ Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new);
 /*!
  * Update a node of a single linked list (with a head node) by order
  * @param L : pointer to a single linked list
- * @param i : the order of a specific node, legitimate range: [1, n + 1]
+ * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be updated
  * @return status (true, false)
  */

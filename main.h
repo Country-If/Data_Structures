@@ -12,12 +12,22 @@
 
 typedef int ElemType;
 
-/* enumerate function return status */
+/*!
+ * enumerate function return status
+ */
 typedef enum Status {
     false,
     true,
     input_error,
 } Status;
+
+/*!
+ * enumerate the option type
+ */
+typedef enum OptType {
+    insert,
+    update,
+} OptType;
 
 /*!
  * Visit a node and print its value
