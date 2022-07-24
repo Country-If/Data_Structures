@@ -52,13 +52,19 @@ void visit(ElemType e) {
 
 
 void get_input_element(ElemType *e) {
-    printf("Please input: ");
+    printf("Please input the data: ");
     if (sizeof((*e)) == sizeof(char)) {
         scanf("%c", e);
     }
     else if (sizeof((*e)) == sizeof(int)) {
         scanf("%d", e);
     }
+}
+
+
+void get_order_position(int *i) {
+    printf("Please input the position: ");
+    *i = judge_int();
 }
 
 

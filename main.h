@@ -32,6 +32,12 @@ void visit(ElemType e);
 void get_input_element(ElemType *e);
 
 /*!
+ * Get the order position
+ * @param i : pointer to the integer
+ */
+void get_order_position(int *i);
+
+/*!
  * Prevent users from entering other characters indiscriminately, and standardize user input of integers
  * @return the legitimate integer
  */
