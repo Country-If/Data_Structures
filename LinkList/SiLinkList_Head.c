@@ -9,6 +9,7 @@ Status InitSiList_Head(SiList *L) {
     if (*L == NULL) {
         return false;
     }
+
     (*L)->next = NULL;
     return true;
 }
@@ -18,6 +19,7 @@ Status DestroySiList_Head(SiList *L) {
     if (*L == NULL) {
         return false;
     }
+
     SiLNode *p;
     while (*L != NULL) {
         p = *L;
@@ -32,10 +34,12 @@ Status SiList_Head_Head_Insert(SiList L, ElemType e) {
     if (L == NULL) {
         return false;
     }
+
     SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
     if (p == NULL) {
         return false;
     }
+
     p->data = e;
     p->next = L->next;
     L->next = p;
@@ -47,14 +51,17 @@ Status SiList_Head_Tail_Insert(SiList L, ElemType e) {
     if (L == NULL) {
         return false;
     }
+
     SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
     if (p == NULL) {
         return false;
     }
+
     SiLNode *t = L;
     while (t->next != NULL) {
         t = t->next;
     }
+
     p->data = e;
     p->next = t->next;
     t->next = p;
@@ -62,7 +69,26 @@ Status SiList_Head_Tail_Insert(SiList L, ElemType e) {
 }
 
 
-Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {}
+Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    SiLNode *t = (SiLNode *) malloc(sizeof(SiLNode));
+    if (t == NULL) {
+        return false;
+    }
+
+    t->data = e;
+    t->next = p->next;
+    p->next = t;
+    return true;
+}
 
 
 Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p) {}
@@ -74,7 +100,26 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {}
 SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {}
 
 
-SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i) {}
+SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i) {
+    if (i < 1) {        // out of bounds
+        return NULL;
+    }
+
+    int j = 0;
+    SiLNode *p = L;
+    while (p != NULL) {         // find the position
+        if (j + 1 == i) {
+            break;
+        }
+        p = p->next;
+        j++;
+    }
+
+    if (i > j + 1) {        // out of bounds
+        return NULL;
+    }
+    return p;
+}
 
 
 Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {}
@@ -87,11 +132,13 @@ Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
     if (L == NULL) {
         return false;
     }
+
     SiList p = L->next;
     while (p != NULL) {
         visit(p->data);
         p = p->next;
     }
+
     printf("NULL\n");
     return true;
 }
@@ -101,6 +148,8 @@ void silinklist_head_menu(void) {
     int choice = 0;
     SiList L = NULL;
     ElemType e;
+    int i;
+    Status result;
     do {
         silinklist_head_menu_show_details();
         choice = judge_int();
@@ -109,7 +158,7 @@ void silinklist_head_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // Initialize
-                if (InitSiList_Head(&L)) {
+                if (InitSiList_Head(&L) == true) {
                     printf("Succeeded!\n");
                 }
                 else {
@@ -121,7 +170,7 @@ void silinklist_head_menu(void) {
                     printf("The list is already NULL!\n");
                 }
                 else {
-                    if (DestroySiList_Head(&L)) {
+                    if (DestroySiList_Head(&L) == true) {
                         printf("Succeeded!\n");
                     }
                     else {
@@ -135,7 +184,7 @@ void silinklist_head_menu(void) {
                 }
                 else {
                     get_input_element(&e);
-                    if (SiList_Head_Head_Insert(L, e)) {
+                    if (SiList_Head_Head_Insert(L, e) == true) {
                         printf("Succeeded!\n");
                     }
                     else {
@@ -149,7 +198,7 @@ void silinklist_head_menu(void) {
                 }
                 else {
                     get_input_element(&e);
-                    if (SiList_Head_Tail_Insert(L, e)) {
+                    if (SiList_Head_Tail_Insert(L, e) == true) {
                         printf("Succeeded!\n");
                     }
                     else {
@@ -158,7 +207,23 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 5:     // Insert a node by order
-
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_order_position(&i);
+                    get_input_element(&e);
+                    result = SiList_Head_Insert_By_Order(L, i, e);
+                    if (result == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
+                }
                 break;
             case 6:     // Delete a node by order
 
@@ -177,7 +242,7 @@ void silinklist_head_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-                    if (!SiList_Head_Traverse(L, visit)) {
+                    if (SiList_Head_Traverse(L, visit) != true) {
                         printf("Failed!\n");
                     }
                 }
