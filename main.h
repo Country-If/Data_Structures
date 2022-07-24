@@ -15,7 +15,8 @@ typedef int ElemType;
 /* enumerate function return status */
 typedef enum Status {
     false,
-    true
+    true,
+    input_error,
 } Status;
 
 /*!
