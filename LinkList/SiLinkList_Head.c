@@ -97,7 +97,16 @@ Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p) {}
 Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {}
 
 
-SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {}
+SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {
+    SiLNode *p = L->next;
+    while (p != NULL) {
+        if (p->data == e) {
+            break;
+        }
+        p = p->next;
+    }
+    return p;
+}
 
 
 SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i) {
