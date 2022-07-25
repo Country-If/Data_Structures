@@ -51,25 +51,25 @@ Status SiList_Head_Tail_Insert(SiList L, ElemType e);
  * @param L : pointer to a single linked list
  * @param i : the order of a specific node, legitimate range: [1, n + 1]
  * @param e : element to be insert
- * @return status (true, false)
+ * @return status (true, false, input_error)
  */
 Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e);
 
 /* Delete */
 /*!
- * Delete a node of a single linked list (with a head node) by a specific node
+ * Delete a node of a single linked list (with a head node) by value
  * @param L : pointer to a single linked list
- * @param p : pointer to a single linked list node to be deleted
+ * @param e : the data of the node to be deleted
  * @return status (true, false)
  */
-Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p);
+Status SiList_Head_Delete_By_Value(SiList L, ElemType e);
 
 /*!
  * Delete a node of a single linked list (with a head node) by order
  * @param L : pointer to a single linked list
  * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be deleted
- * @return status (true, false)
+ * @return status (true, false, input_error)
  */
 Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e);
 
@@ -105,7 +105,7 @@ Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new);
  * @param L : pointer to a single linked list
  * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be updated
- * @return status (true, false)
+ * @return status (true, false, input_error)
  */
 Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e);
 

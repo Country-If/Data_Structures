@@ -91,7 +91,29 @@ Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
 }
 
 
-Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p) {}
+Status SiList_Head_Delete_By_Value(SiList L, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    SiLNode *p_prior = L, *p = L->next;
+    while (p != NULL) {         // find the position
+        if (p->data == e) {
+            break;
+        }
+        p_prior = p;
+        p = p->next;
+    }
+
+    if (p == NULL) {
+        return false;
+    }
+    else {
+        p_prior->next = p->next;
+        free(p);
+        return true;
+    }
+}
 
 
 Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
@@ -104,12 +126,12 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
     }
 
     int j = 1;
-    SiLNode *p_front = L, *p = L->next;
+    SiLNode *p_prior = L, *p = L->next;
     while (p->next != NULL) {         // find the position
         if (i == j) {
             break;
         }
-        p_front = p;
+        p_prior = p;
         p = p->next;
         j++;
     }
@@ -118,7 +140,7 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
         return input_error;
     }
 
-    p_front->next = p->next;
+    p_prior->next = p->next;
     *e = p->data;
     free(p);
     return true;
@@ -281,7 +303,18 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 7:     // Delete a node by value
-
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_input_element(&e);
+                    if (SiList_Head_Delete_By_Value(L, e) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
+                }
                 break;
             case 8:     // Update a node by order
 
