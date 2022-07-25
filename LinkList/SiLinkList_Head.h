@@ -8,10 +8,10 @@
 #ifndef DATA_STRUCTURES_SILINKLIST_HEAD_H
 #define DATA_STRUCTURES_SILINKLIST_HEAD_H
 
-typedef struct SiLNode {
+typedef struct SiLNode_Head {
     ElemType data;
-    struct SiLNode *next;
-} SiLNode, *SiList;
+    struct SiLNode_Head *next;
+} SiLNode_Head, *SiList_Head;
 
 /* Create */
 /*!
@@ -19,7 +19,7 @@ typedef struct SiLNode {
  * @param L : pointer to single linked list pointer
  * @return status (true, false)
  */
-Status InitSiList_Head(SiList *L);
+Status InitSiList_Head(SiList_Head *L);
 
 /* Destroy */
 /*!
@@ -27,7 +27,7 @@ Status InitSiList_Head(SiList *L);
  * @param L : pointer to a single linked list pointer
  * @return status (true, false)
  */
-Status DestroySiList_Head(SiList *L);
+Status DestroySiList_Head(SiList_Head *L);
 
 /* Insert */
 /*!
@@ -36,7 +36,7 @@ Status DestroySiList_Head(SiList *L);
  * @param e : element to be inserted
  * @return status (true, false)
  */
-Status SiList_Head_Head_Insert(SiList L, ElemType e);
+Status SiList_Head_Head_Insert(SiList_Head L, ElemType e);
 
 /*!
  * Insert a node from tail of a single linked list (with a head node)
@@ -44,7 +44,7 @@ Status SiList_Head_Head_Insert(SiList L, ElemType e);
  * @param e : element to be insert
  * @return status (true, false)
  */
-Status SiList_Head_Tail_Insert(SiList L, ElemType e);
+Status SiList_Head_Tail_Insert(SiList_Head L, ElemType e);
 
 /*!
  * Insert a node before a specific node of a single linked list (with a head node) by order
@@ -53,7 +53,7 @@ Status SiList_Head_Tail_Insert(SiList L, ElemType e);
  * @param e : element to be insert
  * @return status (true, false, input_error)
  */
-Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e);
+Status SiList_Head_Insert_By_Order(SiList_Head L, int i, ElemType e);
 
 /* Delete */
 /*!
@@ -62,7 +62,7 @@ Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e);
  * @param e : the data of the node to be deleted
  * @return status (true, false)
  */
-Status SiList_Head_Delete_By_Value(SiList L, ElemType e);
+Status SiList_Head_Delete_By_Value(SiList_Head L, ElemType e);
 
 /*!
  * Delete a node of a single linked list (with a head node) by order
@@ -71,7 +71,7 @@ Status SiList_Head_Delete_By_Value(SiList L, ElemType e);
  * @param e : the data of the node to be deleted
  * @return status (true, false, input_error)
  */
-Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e);
+Status SiList_Head_Delete_By_Order(SiList_Head L, int i, ElemType *e);
 
 /* Retrieve */
 /*!
@@ -80,7 +80,7 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e);
  * @param e : the data of the node to be retrieve
  * @return pointer to the result node if successfully retrieved else NULL
  */
-SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e);
+SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e);
 
 /*!
  * Retrieve a node of a single linked list (with a head node) by order
@@ -89,7 +89,7 @@ SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e);
  * @param opt : the option type: insert or update
  * @return pointer to the prior node of the query node if OptType is insert else pointer to the query node if OptType is update else NULL
  */
-SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt);
+SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt);
 
 /* Update */
 /*!
@@ -99,7 +99,7 @@ SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt);
  * @param new : the new data of the node to be updated
  * @return status (true, false)
  */
-Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new);
+Status SiList_Head_Update_By_Value(SiList_Head L, ElemType old, ElemType new);
 
 /*!
  * Update a node of a single linked list (with a head node) by order
@@ -108,7 +108,7 @@ Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new);
  * @param e : the data of the node to be updated
  * @return status (true, false, input_error)
  */
-Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e);
+Status SiList_Head_Update_By_Order(SiList_Head L, int i, ElemType e);
 
 /* Traverse */
 /*!
@@ -117,7 +117,7 @@ Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e);
  * @param visit : function pointer to a function that prints the data of a node
  * @return status (true, false)
  */
-Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e));
+Status SiList_Head_Traverse(SiList_Head L, void(*visit)(ElemType e));
 
 /*!
  * The single linked list (with a head node) menu

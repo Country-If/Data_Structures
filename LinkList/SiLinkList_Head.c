@@ -4,8 +4,8 @@
 
 #include "SiLinkList_Head.h"
 
-Status InitSiList_Head(SiList *L) {
-    *L = (SiLNode *) malloc(sizeof(SiLNode));
+Status InitSiList_Head(SiList_Head *L) {
+    *L = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
     if (*L == NULL) {
         return false;
     }
@@ -15,12 +15,12 @@ Status InitSiList_Head(SiList *L) {
 }
 
 
-Status DestroySiList_Head(SiList *L) {
+Status DestroySiList_Head(SiList_Head *L) {
     if (*L == NULL) {
         return false;
     }
 
-    SiLNode *p;
+    SiLNode_Head *p;
     while (*L != NULL) {
         p = *L;
         *L = (*L)->next;
@@ -30,12 +30,12 @@ Status DestroySiList_Head(SiList *L) {
 }
 
 
-Status SiList_Head_Head_Insert(SiList L, ElemType e) {
+Status SiList_Head_Head_Insert(SiList_Head L, ElemType e) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
+    SiLNode_Head *p = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
     if (p == NULL) {
         return false;
     }
@@ -47,17 +47,17 @@ Status SiList_Head_Head_Insert(SiList L, ElemType e) {
 }
 
 
-Status SiList_Head_Tail_Insert(SiList L, ElemType e) {
+Status SiList_Head_Tail_Insert(SiList_Head L, ElemType e) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p = (SiLNode *) malloc(sizeof(SiLNode));
+    SiLNode_Head *p = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
     if (p == NULL) {
         return false;
     }
 
-    SiLNode *t = L;
+    SiLNode_Head *t = L;
     while (t->next != NULL) {
         t = t->next;
     }
@@ -69,17 +69,17 @@ Status SiList_Head_Tail_Insert(SiList L, ElemType e) {
 }
 
 
-Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
+Status SiList_Head_Insert_By_Order(SiList_Head L, int i, ElemType e) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i, insert);
+    SiLNode_Head *p = SiList_Head_Retrieve_By_Order(L, i, insert);
     if (p == NULL) {
         return input_error;
     }
 
-    SiLNode *t = (SiLNode *) malloc(sizeof(SiLNode));
+    SiLNode_Head *t = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
     if (t == NULL) {
         return false;
     }
@@ -91,12 +91,12 @@ Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
 }
 
 
-Status SiList_Head_Delete_By_Value(SiList L, ElemType e) {
+Status SiList_Head_Delete_By_Value(SiList_Head L, ElemType e) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p_prior = L, *p = L->next;
+    SiLNode_Head *p_prior = L, *p = L->next;
     while (p != NULL) {         // find the position
         if (p->data == e) {
             break;
@@ -116,7 +116,7 @@ Status SiList_Head_Delete_By_Value(SiList L, ElemType e) {
 }
 
 
-Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
+Status SiList_Head_Delete_By_Order(SiList_Head L, int i, ElemType *e) {
     if (L == NULL || L->next == NULL) {
         return false;
     }
@@ -126,7 +126,7 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
     }
 
     int j = 1;
-    SiLNode *p_prior = L, *p = L->next;
+    SiLNode_Head *p_prior = L, *p = L->next;
     while (p->next != NULL) {         // find the position
         if (i == j) {
             break;
@@ -147,8 +147,8 @@ Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
 }
 
 
-SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {
-    SiLNode *p = L->next;
+SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e) {
+    SiLNode_Head *p = L->next;
     while (p != NULL) {
         if (p->data == e) {
             break;
@@ -159,13 +159,13 @@ SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {
 }
 
 
-SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt) {
+SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt) {
     if (i < 1) {        // out of bounds
         return NULL;
     }
 
     int j = 0;
-    SiLNode *p = L;
+    SiLNode_Head *p = L;
     while (p != NULL) {         // find the position
         if (j + 1 == i) {
             break;
@@ -193,12 +193,12 @@ SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt) {
 }
 
 
-Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {
+Status SiList_Head_Update_By_Value(SiList_Head L, ElemType old, ElemType new) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p = SiList_Head_Retrieve_By_Value(L, old);
+    SiLNode_Head *p = SiList_Head_Retrieve_By_Value(L, old);
     if (p == NULL) {
         return false;
     }
@@ -208,12 +208,12 @@ Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {
 }
 
 
-Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {
+Status SiList_Head_Update_By_Order(SiList_Head L, int i, ElemType e) {
     if (L == NULL) {
         return false;
     }
 
-    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i, update);
+    SiLNode_Head *p = SiList_Head_Retrieve_By_Order(L, i, update);
     if (p == NULL) {
         return input_error;
     }
@@ -223,12 +223,12 @@ Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {
 }
 
 
-Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
+Status SiList_Head_Traverse(SiList_Head L, void(*visit)(ElemType e)) {
     if (L == NULL) {
         return false;
     }
 
-    SiList p = L->next;
+    SiList_Head p = L->next;
     while (p != NULL) {
         visit(p->data);
         p = p->next;
@@ -241,7 +241,7 @@ Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
 
 void silinklist_head_menu(void) {
     int choice = 0;
-    SiList L = NULL;
+    SiList_Head L = NULL;
     ElemType e, old, new;
     int i;
     Status result;
