@@ -74,7 +74,7 @@ Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
         return false;
     }
 
-    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i);
+    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i, insert);
     if (p == NULL) {
         return input_error;
     }
@@ -94,7 +94,35 @@ Status SiList_Head_Insert_By_Order(SiList L, int i, ElemType e) {
 Status SiList_Head_Delete_By_Node(SiList L, SiLNode *p) {}
 
 
-Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {}
+Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    int j = 1;
+    SiLNode *p_front = L, *p = L->next;
+    while (p->next != NULL) {         // find the position
+        if (i == j) {
+            break;
+        }
+        p_front = p;
+        p = p->next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return input_error;
+    }
+
+    p_front->next = p->next;
+    *e = p->data;
+    free(p);
+    return true;
+}
 
 
 SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {
@@ -109,7 +137,7 @@ SiLNode *SiList_Head_Retrieve_By_Value(SiList L, ElemType e) {
 }
 
 
-SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i) {
+SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt) {
     if (i < 1) {        // out of bounds
         return NULL;
     }
@@ -124,7 +152,7 @@ SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i) {
         j++;
     }
 
-    if (i > j + 1) {        // out of bounds
+    if (opt == insert && i > j + 1 || opt == update && i > j) {        // out of bounds
         return NULL;
     }
     return p;
@@ -235,7 +263,22 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 6:     // Delete a node by order
-
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_order_position(&i);
+                    result = SiList_Head_Delete_By_Order(L, i, &e);
+                    if (result == true) {
+                        printf("Successfully deleted data: %d !\n", e);
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
+                }
                 break;
             case 7:     // Delete a node by value
 
