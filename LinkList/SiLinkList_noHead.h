@@ -17,9 +17,8 @@ typedef struct SiLNode_noHead {
 /*!
  * Initialize a single linked list (without a head node)
  * @param L : pointer to single linked list pointer
- * @return status (true, false)
  */
-Status InitSiList_noHead(SiList_noHead *L);
+void InitSiList_noHead(SiList_noHead *L);
 
 /* Destroy */
 /*!

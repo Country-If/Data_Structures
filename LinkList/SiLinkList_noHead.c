@@ -4,6 +4,56 @@
 
 #include "SiLinkList_noHead.h"
 
+void InitSiList_noHead(SiList_noHead *L) {
+    *L = NULL;
+}
+
+
+Status DestroySiList_noHead(SiList_noHead *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    SiLNode_noHead *p;
+    while (*L != NULL) {
+        p = *L;
+        *L = (*L)->next;
+        free(p);
+    }
+    return true;
+}
+
+
+Status SiList_noHead_Head_Insert(SiList_noHead L, ElemType e) {}
+
+
+Status SiList_noHead_Tail_Insert(SiList_noHead L, ElemType e) {}
+
+
+Status SiList_noHead_Insert_By_Order(SiList_noHead L, int i, ElemType e) {}
+
+
+Status SiList_noHead_Delete_By_Value(SiList_noHead L, ElemType e) {}
+
+
+Status SiList_noHead_Delete_By_Order(SiList_noHead L, int i, ElemType *e) {}
+
+
+SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {}
+
+
+SiLNode_noHead *SiList_noHead_Retrieve_By_Order(SiList_noHead L, int i, OptType opt) {}
+
+
+Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new) {}
+
+
+Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {}
+
+
+Status SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {}
+
+
 void silinklist_noHead_menu(void) {
     int choice = 0;
     SiList_noHead L = NULL;
@@ -18,14 +68,21 @@ void silinklist_noHead_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // Initialize
-
+                InitSiList_noHead(&L);
+                printf("Succeeded!\n");
+                printf("Current list: NULL\n");
                 break;
             case 2:     // Destroy
                 if (L == NULL) {
                     printf("The list is already NULL!\n");
                 }
                 else {
-
+                    if (DestroySiList_noHead(&L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 3:     // Insert a node from head
@@ -90,9 +147,9 @@ void silinklist_noHead_menu(void) {
         }
     } while (choice != 0);
     // release memory
-//    if (L != NULL) {
-//        DestroySiList_noHead(&L);
-//    }
+    if (L != NULL) {
+        DestroySiList_noHead(&L);
+    }
 }
 
 
