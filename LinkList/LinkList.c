@@ -23,7 +23,7 @@ void linklist_menu(void) {
                 silinklist_head_menu();
                 break;
             case 2:     // single linked list (without a head node)
-
+                silinklist_noHead_menu();
                 break;
             case 3:     // double linked list
 
