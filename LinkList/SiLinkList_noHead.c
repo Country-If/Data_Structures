@@ -51,7 +51,14 @@ Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new
 Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {}
 
 
-Status SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {}
+void SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {
+    SiList_noHead p = L;
+    while (p != NULL) {
+        visit(p->data);
+        p = p->next;
+    }
+    printf("NULL\n");
+}
 
 
 void silinklist_noHead_menu(void) {
@@ -90,7 +97,16 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_input_element(&e);
+                    system("cls");
+                    if (SiList_noHead_Head_Insert(L, e) == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 4:     // Insert a node from tail
@@ -98,7 +114,16 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_input_element(&e);
+                    system("cls");
+                    if (SiList_noHead_Tail_Insert(L, e) == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 5:     // Insert a node by order
@@ -106,7 +131,21 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_order_position(&i);
+                    get_input_element(&e);
+                    system("cls");
+                    result = SiList_noHead_Insert_By_Order(L, i, e);
+                    if (result == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 6:     // Delete a node by order
@@ -114,7 +153,20 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_order_position(&i);
+                    system("cls");
+                    result = SiList_noHead_Delete_By_Order(L, i, &e);
+                    if (result == true) {
+                        printf("Successfully deleted data: %d\n", e);
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 7:     // Delete a node by value
@@ -122,7 +174,16 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_input_element(&e);
+                    system("cls");
+                    if (SiList_noHead_Delete_By_Value(L, e) == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
                 }
                 break;
             case 8:     // Update a node by order
@@ -130,7 +191,21 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_order_position(&i);
+                    get_input_element(&e);
+                    system("cls");
+                    result = SiList_noHead_Update_By_Order(L, i, e);
+                    if (result == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 9:     // Update a node by value
@@ -138,7 +213,17 @@ void silinklist_noHead_menu(void) {
                     printf("The list is NULL!\n");
                 }
                 else {
-
+                    get_input_element(&old);
+                    get_input_element(&new);
+                    system("cls");
+                    if (SiList_noHead_Update_By_Value(L, old, new) == true) {
+                        printf("Succeeded!\n");
+                        printf("Current list: ");
+                        SiList_noHead_Traverse(L, visit);
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
                 }
                 break;
             default:

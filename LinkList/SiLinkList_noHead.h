@@ -114,9 +114,8 @@ Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e);
  * Traverse the single linked list (without a head node)
  * @param L : pointer to a single linked list
  * @param visit : function pointer to a function that prints the data of a node
- * @return status (true, false)
  */
-Status SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e));
+void SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e));
 
 /*!
  * The single linked list (without a head node) menu
