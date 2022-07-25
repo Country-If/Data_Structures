@@ -57,7 +57,7 @@ void get_input_element(ElemType *e) {
         scanf("%c", e);
     }
     else if (sizeof((*e)) == sizeof(int)) {
-        scanf("%d", e);
+        *e = judge_int();
     }
 }
 
