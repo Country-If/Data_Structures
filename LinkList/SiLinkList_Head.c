@@ -117,7 +117,7 @@ Status SiList_Head_Delete_By_Value(SiList L, ElemType e) {
 
 
 Status SiList_Head_Delete_By_Order(SiList L, int i, ElemType *e) {
-    if (L == NULL) {
+    if (L == NULL || L->next == NULL) {
         return false;
     }
 
@@ -174,17 +174,53 @@ SiLNode *SiList_Head_Retrieve_By_Order(SiList L, int i, OptType opt) {
         j++;
     }
 
-    if (opt == insert && i > j + 1 || opt == update && i > j) {        // out of bounds
+
+    if (i > j + 1) {        // out of bounds
         return NULL;
     }
-    return p;
+
+    if (opt == insert) {
+        return p;
+    }
+    else if (opt == update) {
+        if (p == NULL) {
+            return NULL;
+        }
+        else {
+            return p->next;
+        }
+    }
 }
 
 
-Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {}
+Status SiList_Head_Update_By_Value(SiList L, ElemType old, ElemType new) {
+    if (L == NULL) {
+        return false;
+    }
+
+    SiLNode *p = SiList_Head_Retrieve_By_Value(L, old);
+    if (p == NULL) {
+        return false;
+    }
+
+    p->data = new;
+    return true;
+}
 
 
-Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {}
+Status SiList_Head_Update_By_Order(SiList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    SiLNode *p = SiList_Head_Retrieve_By_Order(L, i, update);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    p->data = e;
+    return true;
+}
 
 
 Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
@@ -206,7 +242,7 @@ Status SiList_Head_Traverse(SiList L, void(*visit)(ElemType e)) {
 void silinklist_head_menu(void) {
     int choice = 0;
     SiList L = NULL;
-    ElemType e;
+    ElemType e, old, new;
     int i;
     Status result;
     do {
@@ -285,7 +321,7 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 6:     // Delete a node by order
-                if (L == NULL) {
+                if (L == NULL || L->next == NULL) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -303,7 +339,7 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 7:     // Delete a node by value
-                if (L == NULL) {
+                if (L == NULL || L->next == NULL) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -317,13 +353,41 @@ void silinklist_head_menu(void) {
                 }
                 break;
             case 8:     // Update a node by order
-
+                if (L == NULL || L->next == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_order_position(&i);
+                    get_input_element(&e);
+                    result = SiList_Head_Update_By_Order(L, i, e);
+                    if (result == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
+                }
                 break;
             case 9:     // Update a node by value
-
+                if (L == NULL || L->next == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    get_input_element(&old);
+                    get_input_element(&new);
+                    if (SiList_Head_Update_By_Value(L, old, new) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
+                }
                 break;
             case 10:    // Traverse the list
-                if (L == NULL) {
+                if (L == NULL || L->next == NULL) {
                     printf("The list is NULL!\n");
                 }
                 else {
