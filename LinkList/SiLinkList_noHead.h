@@ -31,11 +31,11 @@ Status DestroySiList_noHead(SiList_noHead *L);
 /* Insert */
 /*!
  * Insert a node from head of a single linked list (without a head node)
- * @param L : pointer to a single linked list
+ * @param L : pointer to the single linked list pointer
  * @param e : element to be inserted
  * @return status (true, false)
  */
-Status SiList_noHead_Head_Insert(SiList_noHead L, ElemType e);
+Status SiList_noHead_Head_Insert(SiList_noHead *L, ElemType e);
 
 /*!
  * Insert a node from tail of a single linked list (without a head node)

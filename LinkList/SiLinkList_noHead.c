@@ -24,8 +24,24 @@ Status DestroySiList_noHead(SiList_noHead *L) {
 }
 
 
-Status SiList_noHead_Head_Insert(SiList_noHead L, ElemType e) {}
+Status SiList_noHead_Head_Insert(SiList_noHead *L, ElemType e) {
+    SiLNode_noHead *p = (SiLNode_noHead *) malloc(sizeof(SiLNode_noHead));
+    if (p == NULL) {
+        return false;
+    }
 
+    if (*L == NULL) {
+        *L = p;
+        (*L)->data = e;
+        (*L)->next = NULL;
+    }
+    else {
+        p->data = e;
+        p->next = *L;
+        *L = p;
+    }
+    return true;
+}
 
 Status SiList_noHead_Tail_Insert(SiList_noHead L, ElemType e) {}
 
@@ -95,7 +111,7 @@ void silinklist_noHead_menu(void) {
             case 3:     // Insert a node from head
                 get_input_element(&e);
                 system("cls");
-                if (SiList_noHead_Head_Insert(L, e) == true) {
+                if (SiList_noHead_Head_Insert(&L, e) == true) {
                     printf("Succeeded!\n");
                     printf("Current list: ");
                     SiList_noHead_Traverse(L, visit);
@@ -228,7 +244,7 @@ void silinklist_noHead_menu_show_details(void) {
     printf("\t**************************************************\n");
     printf("\t*     Single Linked List (without a head node)   *\n");
     printf("\t*------------------------------------------------*\n");
-    printf("\t*  1  |   Initialize                             *\n");
+    printf("\t*  1  |   Initialize (Reset)                     *\n");
     printf("\t*------------------------------------------------*\n");
     printf("\t*  2  |   Destroy                                *\n");
     printf("\t*------------------------------------------------*\n");
