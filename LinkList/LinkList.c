@@ -26,7 +26,7 @@ void linklist_menu(void) {
                 silinklist_noHead_menu();
                 break;
             case 3:     // double linked list
-
+                dolinklist_menu();
                 break;
             case 4:     // circular single linked list
 
