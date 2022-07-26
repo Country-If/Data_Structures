@@ -240,7 +240,7 @@ Status SiList_Head_Traverse(SiList_Head L, void(*visit)(ElemType e)) {
 
 
 void silinklist_head_menu(void) {
-    int choice = 0;
+    int choice;
     SiList_Head L = NULL;
     ElemType e, old, new;
     int i;

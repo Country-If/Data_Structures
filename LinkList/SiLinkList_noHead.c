@@ -161,6 +161,7 @@ Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {
 
         SiLNode_noHead *t = p->next;
         p->next = t->next;    // p->next = p->next->next;
+        *e = t->data;
         free(t);
     }
     return true;
@@ -230,7 +231,7 @@ void SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {
 
 
 void silinklist_noHead_menu(void) {
-    int choice = 0;
+    int choice;
     SiList_noHead L = NULL;
     ElemType e, old, new;
     int i;
