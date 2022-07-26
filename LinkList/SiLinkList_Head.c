@@ -283,8 +283,6 @@ void silinklist_head_menu(void) {
                     system("cls");
                     if (SiList_Head_Head_Insert(L, e) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
                     }
                     else {
                         printf("Failed!\n");
@@ -300,8 +298,6 @@ void silinklist_head_menu(void) {
                     system("cls");
                     if (SiList_Head_Tail_Insert(L, e) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
                     }
                     else {
                         printf("Failed!\n");
@@ -319,8 +315,6 @@ void silinklist_head_menu(void) {
                     result = SiList_Head_Insert_By_Order(L, i, e);
                     if (result == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
                     }
                     else {
                         if (result == input_error) {
@@ -340,8 +334,9 @@ void silinklist_head_menu(void) {
                     result = SiList_Head_Delete_By_Order(L, i, &e);
                     if (result == true) {
                         printf("Successfully deleted data: %d\n", e);
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
+                        if (L->next == NULL) {
+                            printf("Current list: NULL\n");
+                        }
                     }
                     else {
                         if (result == input_error) {
@@ -360,8 +355,9 @@ void silinklist_head_menu(void) {
                     system("cls");
                     if (SiList_Head_Delete_By_Value(L, e) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
+                        if (L->next == NULL) {
+                            printf("Current list: NULL\n");
+                        }
                     }
                     else {
                         printf("Cannot find the element!\n");
@@ -379,8 +375,6 @@ void silinklist_head_menu(void) {
                     result = SiList_Head_Update_By_Order(L, i, e);
                     if (result == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
                     }
                     else {
                         if (result == input_error) {
@@ -400,8 +394,6 @@ void silinklist_head_menu(void) {
                     system("cls");
                     if (SiList_Head_Update_By_Value(L, old, new) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_Head_Traverse(L, visit);
                     }
                     else {
                         printf("Cannot find the element!\n");
@@ -411,6 +403,10 @@ void silinklist_head_menu(void) {
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
+        }
+        if (choice >= 3 && choice <= 9 && L != NULL && L->next != NULL) {
+            printf("Current list: ");
+            SiList_Head_Traverse(L, visit);
         }
     } while (choice != 0);
     // release memory
