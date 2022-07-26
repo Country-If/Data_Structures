@@ -68,7 +68,38 @@ Status SiList_noHead_Tail_Insert(SiList_noHead *L, ElemType e) {
 }
 
 
-Status SiList_noHead_Insert_By_Order(SiList_noHead *L, int i, ElemType e) {}
+Status SiList_noHead_Insert_By_Order(SiList_noHead *L, int i, ElemType e) {
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    SiLNode_noHead *p = (SiLNode_noHead *) malloc(sizeof(SiLNode_noHead));
+    if (p == NULL) {
+        return false;
+    }
+    p->data = e;
+
+    if (i == 1) {
+        p->next = *L;
+        *L = p;
+    }
+    else {
+        int j = 1;
+        SiLNode_noHead *t = *L;
+        while (t->next != NULL && i != j + 1) {     // find the insert position (prior node)
+            t = t->next;
+            j++;
+        }
+
+        if (i > j + 1) {        // out of bounds
+            return input_error;
+        }
+
+        p->next = t->next;
+        t->next = p;
+    }
+    return true;
+}
 
 
 Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {
