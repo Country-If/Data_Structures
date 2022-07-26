@@ -133,7 +133,29 @@ Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new
 }
 
 
-Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {}
+Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    int j = 1;
+    SiLNode_noHead *p = L;
+    while (i != j && p->next != NULL) {
+        p = p->next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return input_error;
+    }
+
+    p->data = e;
+    return true;
+}
 
 
 void SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {
