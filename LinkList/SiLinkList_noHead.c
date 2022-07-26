@@ -134,7 +134,37 @@ Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {
 }
 
 
-Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {}
+Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    SiLNode_noHead *p = *L;
+    if (i == 1) {
+        *L = (*L)->next;
+        free(p);
+    }
+    else {
+        int j = 2;
+        while (i != j && p->next->next != NULL) {     // find the delete position (prior node)
+            j++;
+            p = p->next;
+        }
+
+        if (i > j) {        // out of bounds
+            return input_error;
+        }
+
+        SiLNode_noHead *t = p->next;
+        p->next = t->next;    // p->next = p->next->next;
+        free(t);
+    }
+    return true;
+}
 
 
 SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {
