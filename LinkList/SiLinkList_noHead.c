@@ -93,63 +93,48 @@ void silinklist_noHead_menu(void) {
                 }
                 break;
             case 3:     // Insert a node from head
-                if (L == NULL) {
-                    printf("The list is NULL!\n");
+                get_input_element(&e);
+                system("cls");
+                if (SiList_noHead_Head_Insert(L, e) == true) {
+                    printf("Succeeded!\n");
+                    printf("Current list: ");
+                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
-                    get_input_element(&e);
-                    system("cls");
-                    if (SiList_noHead_Head_Insert(L, e) == true) {
-                        printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
-                    }
-                    else {
-                        printf("Failed!\n");
-                    }
+                    printf("Failed!\n");
                 }
                 break;
             case 4:     // Insert a node from tail
-                if (L == NULL) {
-                    printf("The list is NULL!\n");
+                get_input_element(&e);
+                system("cls");
+                if (SiList_noHead_Tail_Insert(L, e) == true) {
+                    printf("Succeeded!\n");
+                    printf("Current list: ");
+                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
-                    get_input_element(&e);
-                    system("cls");
-                    if (SiList_noHead_Tail_Insert(L, e) == true) {
-                        printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
-                    }
-                    else {
-                        printf("Failed!\n");
-                    }
+                    printf("Failed!\n");
                 }
                 break;
             case 5:     // Insert a node by order
-                if (L == NULL) {
-                    printf("The list is NULL!\n");
+                get_order_position(&i);
+                get_input_element(&e);
+                system("cls");
+                result = SiList_noHead_Insert_By_Order(L, i, e);
+                if (result == true) {
+                    printf("Succeeded!\n");
+                    printf("Current list: ");
+                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
-                    get_order_position(&i);
-                    get_input_element(&e);
-                    system("cls");
-                    result = SiList_noHead_Insert_By_Order(L, i, e);
-                    if (result == true) {
-                        printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
+                    if (result == input_error) {
+                        printf("Out of bounds!\n");
                     }
-                    else {
-                        if (result == input_error) {
-                            printf("Out of bounds!\n");
-                        }
-                        printf("Failed!\n");
-                    }
+                    printf("Failed!\n");
                 }
                 break;
             case 6:     // Delete a node by order
-                if (L == NULL || L->next == NULL) {
+                if (L == NULL) {
                     printf("The list is NULL!\n");
                 }
                 else {
