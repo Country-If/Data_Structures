@@ -70,7 +70,36 @@ Status SiList_noHead_Tail_Insert(SiList_noHead *L, ElemType e) {
 Status SiList_noHead_Insert_By_Order(SiList_noHead *L, int i, ElemType e) {}
 
 
-Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {}
+Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    if ((*L)->data == e) {
+        SiLNode_noHead *p = *L;
+        *L = (*L)->next;
+        free(p);
+    }
+    else {
+        SiLNode_noHead *p_prior = *L, *p = (*L)->next;
+        while (p != NULL) {
+            if (p->data == e) {
+                break;
+            }
+            p_prior = p;
+            p = p->next;
+        }
+
+        if (p == NULL) {
+            return false;
+        }
+        else {
+            p_prior->next = p->next;
+            free(p);
+            return true;
+        }
+    }
+}
 
 
 Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {}
