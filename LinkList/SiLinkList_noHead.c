@@ -43,6 +43,7 @@ Status SiList_noHead_Head_Insert(SiList_noHead *L, ElemType e) {
     return true;
 }
 
+
 Status SiList_noHead_Tail_Insert(SiList_noHead *L, ElemType e) {
     SiLNode_noHead *p = (SiLNode_noHead *) malloc(sizeof(SiLNode_noHead));
     if (p == NULL) {
@@ -115,9 +116,6 @@ SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {
     }
     return p;
 }
-
-
-SiLNode_noHead *SiList_noHead_Retrieve_By_Order(SiList_noHead L, int i, OptType opt) {}
 
 
 Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new) {
