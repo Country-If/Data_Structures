@@ -76,13 +76,34 @@ Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {}
 Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {}
 
 
-SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {}
+SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {
+    SiLNode_noHead *p = L;
+    while (p != NULL) {
+        if (p->data == e) {
+            break;
+        }
+        p = p->next;
+    }
+    return p;
+}
 
 
 SiLNode_noHead *SiList_noHead_Retrieve_By_Order(SiList_noHead L, int i, OptType opt) {}
 
 
-Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new) {}
+Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new) {
+    if (L == NULL) {
+        return false;
+    }
+
+    SiLNode_noHead *p = SiList_noHead_Retrieve_By_Value(L, old);
+    if (p == NULL) {
+        return false;
+    }
+
+    p->data = new;
+    return true;
+}
 
 
 Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {}
@@ -133,8 +154,6 @@ void silinklist_noHead_menu(void) {
                 system("cls");
                 if (SiList_noHead_Head_Insert(&L, e) == true) {
                     printf("Succeeded!\n");
-                    printf("Current list: ");
-                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
                     printf("Failed!\n");
@@ -145,8 +164,6 @@ void silinklist_noHead_menu(void) {
                 system("cls");
                 if (SiList_noHead_Tail_Insert(&L, e) == true) {
                     printf("Succeeded!\n");
-                    printf("Current list: ");
-                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
                     printf("Failed!\n");
@@ -159,8 +176,6 @@ void silinklist_noHead_menu(void) {
                 result = SiList_noHead_Insert_By_Order(&L, i, e);
                 if (result == true) {
                     printf("Succeeded!\n");
-                    printf("Current list: ");
-                    SiList_noHead_Traverse(L, visit);
                 }
                 else {
                     if (result == input_error) {
@@ -179,8 +194,6 @@ void silinklist_noHead_menu(void) {
                     result = SiList_noHead_Delete_By_Order(&L, i, &e);
                     if (result == true) {
                         printf("Successfully deleted data: %d\n", e);
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
                     }
                     else {
                         if (result == input_error) {
@@ -199,8 +212,6 @@ void silinklist_noHead_menu(void) {
                     system("cls");
                     if (SiList_noHead_Delete_By_Value(&L, e) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
                     }
                     else {
                         printf("Cannot find the element!\n");
@@ -218,8 +229,6 @@ void silinklist_noHead_menu(void) {
                     result = SiList_noHead_Update_By_Order(L, i, e);
                     if (result == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
                     }
                     else {
                         if (result == input_error) {
@@ -239,8 +248,6 @@ void silinklist_noHead_menu(void) {
                     system("cls");
                     if (SiList_noHead_Update_By_Value(L, old, new) == true) {
                         printf("Succeeded!\n");
-                        printf("Current list: ");
-                        SiList_noHead_Traverse(L, visit);
                     }
                     else {
                         printf("Cannot find the element!\n");
@@ -250,6 +257,10 @@ void silinklist_noHead_menu(void) {
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
+        }
+        if (choice >= 1 && choice <= 9) {
+            printf("Current list: ");
+            SiList_noHead_Traverse(L, visit);
         }
     } while (choice != 0);
     // release memory
