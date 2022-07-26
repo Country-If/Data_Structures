@@ -16,14 +16,14 @@ typedef struct SiLNode_noHead {
 /* Create */
 /*!
  * Initialize a single linked list (without a head node)
- * @param L : pointer to single linked list pointer
+ * @param L : pointer to the single linked list pointer
  */
 void InitSiList_noHead(SiList_noHead *L);
 
 /* Destroy */
 /*!
  * Destroy a single linked list (without a head node)
- * @param L : pointer to a single linked list pointer
+ * @param L : pointer to the single linked list pointer
  * @return status (true, false)
  */
 Status DestroySiList_noHead(SiList_noHead *L);
@@ -39,38 +39,38 @@ Status SiList_noHead_Head_Insert(SiList_noHead *L, ElemType e);
 
 /*!
  * Insert a node from tail of a single linked list (without a head node)
- * @param L : pointer to a single linked list
+ * @param L : pointer to the single linked list pointer
  * @param e : element to be insert
  * @return status (true, false)
  */
-Status SiList_noHead_Tail_Insert(SiList_noHead L, ElemType e);
+Status SiList_noHead_Tail_Insert(SiList_noHead *L, ElemType e);
 
 /*!
  * Insert a node before a specific node of a single linked list (without a head node) by order
- * @param L : pointer to a single linked list
+ * @param L : pointer to the single linked list pointer
  * @param i : the order of a specific node, legitimate range: [1, n + 1]
  * @param e : element to be insert
  * @return status (true, false, input_error)
  */
-Status SiList_noHead_Insert_By_Order(SiList_noHead L, int i, ElemType e);
+Status SiList_noHead_Insert_By_Order(SiList_noHead *L, int i, ElemType e);
 
 /* Delete */
 /*!
  * Delete a node of a single linked list (without a head node) by value
- * @param L : pointer to a single linked list
+ * @param L : pointer to the single linked list pointer
  * @param e : the data of the node to be deleted
  * @return status (true, false)
  */
-Status SiList_noHead_Delete_By_Value(SiList_noHead L, ElemType e);
+Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e);
 
 /*!
  * Delete a node of a single linked list (without a head node) by order
- * @param L : pointer to a single linked list
+ * @param L : pointer to the single linked list pointer
  * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be deleted
  * @return status (true, false, input_error)
  */
-Status SiList_noHead_Delete_By_Order(SiList_noHead L, int i, ElemType *e);
+Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e);
 
 /* Retrieve */
 /*!

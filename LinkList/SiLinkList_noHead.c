@@ -43,16 +43,16 @@ Status SiList_noHead_Head_Insert(SiList_noHead *L, ElemType e) {
     return true;
 }
 
-Status SiList_noHead_Tail_Insert(SiList_noHead L, ElemType e) {}
+Status SiList_noHead_Tail_Insert(SiList_noHead *L, ElemType e) {}
 
 
-Status SiList_noHead_Insert_By_Order(SiList_noHead L, int i, ElemType e) {}
+Status SiList_noHead_Insert_By_Order(SiList_noHead *L, int i, ElemType e) {}
 
 
-Status SiList_noHead_Delete_By_Value(SiList_noHead L, ElemType e) {}
+Status SiList_noHead_Delete_By_Value(SiList_noHead *L, ElemType e) {}
 
 
-Status SiList_noHead_Delete_By_Order(SiList_noHead L, int i, ElemType *e) {}
+Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e) {}
 
 
 SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e) {}
@@ -123,7 +123,7 @@ void silinklist_noHead_menu(void) {
             case 4:     // Insert a node from tail
                 get_input_element(&e);
                 system("cls");
-                if (SiList_noHead_Tail_Insert(L, e) == true) {
+                if (SiList_noHead_Tail_Insert(&L, e) == true) {
                     printf("Succeeded!\n");
                     printf("Current list: ");
                     SiList_noHead_Traverse(L, visit);
@@ -136,7 +136,7 @@ void silinklist_noHead_menu(void) {
                 get_order_position(&i);
                 get_input_element(&e);
                 system("cls");
-                result = SiList_noHead_Insert_By_Order(L, i, e);
+                result = SiList_noHead_Insert_By_Order(&L, i, e);
                 if (result == true) {
                     printf("Succeeded!\n");
                     printf("Current list: ");
@@ -156,7 +156,7 @@ void silinklist_noHead_menu(void) {
                 else {
                     get_order_position(&i);
                     system("cls");
-                    result = SiList_noHead_Delete_By_Order(L, i, &e);
+                    result = SiList_noHead_Delete_By_Order(&L, i, &e);
                     if (result == true) {
                         printf("Successfully deleted data: %d\n", e);
                         printf("Current list: ");
@@ -177,7 +177,7 @@ void silinklist_noHead_menu(void) {
                 else {
                     get_input_element(&e);
                     system("cls");
-                    if (SiList_noHead_Delete_By_Value(L, e) == true) {
+                    if (SiList_noHead_Delete_By_Value(&L, e) == true) {
                         printf("Succeeded!\n");
                         printf("Current list: ");
                         SiList_noHead_Traverse(L, visit);
