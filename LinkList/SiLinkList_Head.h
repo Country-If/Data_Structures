@@ -85,7 +85,7 @@ SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e);
 /*!
  * Retrieve a node of a single linked list (with a head node) by order
  * @param L : pointer to a single linked list
- * @param i : the order of a specific node, legitimate range: [1, n]
+ * @param i : the order of a specific node, legitimate range: [1, n + 1] if opt is insert else [1, n]
  * @param opt : the option type: insert or update
  * @return pointer to the prior node of the query node if OptType is insert else pointer to the query node if OptType is update else NULL
  */
