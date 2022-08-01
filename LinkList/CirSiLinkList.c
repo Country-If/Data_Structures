@@ -83,7 +83,7 @@ Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e) {}
 CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e) {}
 
 
-CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i, OptType opt) {}
+CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i) {}
 
 
 Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {}
