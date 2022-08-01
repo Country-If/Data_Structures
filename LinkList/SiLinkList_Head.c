@@ -421,7 +421,7 @@ void silinklist_head_menu_show_details(void) {
     printf("\t**************************************************\n");
     printf("\t*      Single Linked List (with a head node)     *\n");
     printf("\t*------------------------------------------------*\n");
-    printf("\t*  1  |   Initialize                             *\n");
+    printf("\t*  1  |   Initialize (Reset)                     *\n");
     printf("\t*------------------------------------------------*\n");
     printf("\t*  2  |   Destroy                                *\n");
     printf("\t*------------------------------------------------*\n");
