@@ -118,7 +118,31 @@ CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e) {
 }
 
 
-CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i) {}
+CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i) {
+    if (L == NULL) {
+        return NULL;
+    }
+
+    if (i < 1) {        // out of bounds
+        return NULL;
+    }
+
+    int j = 1;
+    CirSiLNode *p = L->next;
+    while (p != L) {
+        if (i == j) {
+            break;
+        }
+        p = p->next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return NULL;
+    }
+
+    return p;
+}
 
 
 Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
@@ -127,7 +151,7 @@ Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
     }
 
     CirSiLNode *p = CirSiList_Retrieve_By_Value(L, old);
-    if (p == L) {
+    if (p == NULL) {
         return false;
     }
 
@@ -136,7 +160,19 @@ Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
 }
 
 
-Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e) {}
+Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p = CirSiList_Retrieve_By_Order(L, i);
+    if (p == NULL || p == L) {
+        return input_error;
+    }
+
+    p->data = e;
+    return true;
+}
 
 
 Status CirSiList_Traverse(CirSiList L, void(*visit)(ElemType e)) {
