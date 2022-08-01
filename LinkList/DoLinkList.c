@@ -46,7 +46,30 @@ Status DoList_Head_Insert(DoList *L, ElemType e) {
 }
 
 
-Status DoList_Tail_Insert(DoList *L, ElemType e) {}
+Status DoList_Tail_Insert(DoList *L, ElemType e) {
+    DoLNode *p = (DoLNode *) malloc(sizeof(DoLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    if (*L == NULL) {
+        *L = p;
+        (*L)->data = e;
+        (*L)->prior = NULL;
+        (*L)->next = NULL;
+    }
+    else {
+        DoLNode *t = *L;
+        while (t->next != NULL) {
+            t = t->next;
+        }
+        p->data = e;
+        p->prior = t;
+        p->next = NULL;
+        t->next = p;
+    }
+    return true;
+}
 
 
 Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {}
@@ -110,12 +133,22 @@ void dolinklist_menu(void) {
             case 3:     // Insert a node from head
                 get_input_element(&e);
                 system("cls");
-                DoList_Head_Insert(&L, e);
+                if (DoList_Head_Insert(&L, e) == true) {
+                    printf("Succeeded!\n");
+                }
+                else {
+                    printf("Failed!\n");
+                }
                 break;
             case 4:     // Insert a node from tail
                 get_input_element(&e);
                 system("cls");
-
+                if (DoList_Tail_Insert(&L, e) == true) {
+                    printf("Succeeded!\n");
+                }
+                else {
+                    printf("Failed!\n");
+                }
                 break;
             case 5:     // Insert a node by order
                 get_order_position(&i);
