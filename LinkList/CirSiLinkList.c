@@ -4,10 +4,32 @@
 
 #include "CirSiLinkList.h"
 
-Status InitCirSiList(CirSiList *L) {}
+Status InitCirSiList(CirSiList *L) {
+    *L = (CirSiLNode *) malloc(sizeof(CirSiLNode));
+    if (*L == NULL) {
+        return false;
+    }
+
+    (*L)->next = *L;
+    return true;
+}
 
 
-Status DestroyCirSiList(CirSiList *L) {}
+Status DestroyCirSiList(CirSiList *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p;
+    while ((*L)->next != *L) {
+        p = *L;
+        *L = (*L)->next;
+        free(p);
+    }
+    free(*L);
+    *L = NULL;
+    return true;
+}
 
 
 Status CirSiList_Head_Insert(CirSiList L, ElemType e) {}
@@ -37,7 +59,20 @@ Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {}
 Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e) {}
 
 
-Status CirSiList_Traverse(CirSiList L, void(*visit)(ElemType e)) {}
+Status CirSiList_Traverse(CirSiList L, void(*visit)(ElemType e)) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p = L->next;
+    while (p != L) {
+        visit(p->data);
+        p = p->next;
+    }
+
+    printf("NULL\n");
+    return true;
+}
 
 
 void cirsilist_menu(void) {
@@ -126,7 +161,7 @@ void cirsilist_menu(void) {
                 }
                 break;
             case 6:     // Delete a node by order
-                if (L == NULL || L->next == NULL) {
+                if (L == NULL || L->next == L) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -148,7 +183,7 @@ void cirsilist_menu(void) {
                 }
                 break;
             case 7:     // Delete a node by value
-                if (L == NULL || L->next == NULL) {
+                if (L == NULL || L->next == L) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -166,7 +201,7 @@ void cirsilist_menu(void) {
                 }
                 break;
             case 8:     // Update a node by order
-                if (L == NULL || L->next == NULL) {
+                if (L == NULL || L->next == L) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -186,7 +221,7 @@ void cirsilist_menu(void) {
                 }
                 break;
             case 9:     // Update a node by value
-                if (L == NULL || L->next == NULL) {
+                if (L == NULL || L->next == L) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -205,7 +240,7 @@ void cirsilist_menu(void) {
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 9 && L != NULL && L->next != NULL) {
+        if (choice >= 3 && choice <= 9 && L != NULL && L->next != L) {
             printf("Current list: ");
             CirSiList_Traverse(L, visit);
         }
