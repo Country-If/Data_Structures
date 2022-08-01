@@ -90,7 +90,43 @@ void DoList_Delete_By_Node(DoList *L, DoLNode *p) {
 }
 
 
-Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {}
+Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    DoLNode *p = (DoLNode *) malloc(sizeof(DoLNode));
+    if (p == NULL) {
+        return false;
+    }
+    p->data = e;
+
+    if (i == 1) {
+        p->prior = NULL;
+        p->next = *L;
+        *L = p;
+    }
+    else {
+        int j = 1;
+        DoLNode *t = *L;
+        while (t->next != NULL && i != j + 1) {     // find the insert position (prior node)
+            t = t->next;
+            j++;
+        }
+
+        if (i > j + 1) {        // out of bounds
+            return input_error;
+        }
+
+        p->prior = t;
+        p->next = t->next;
+        if (t->next != NULL) {
+            t->next->prior = p;
+        }
+        t->next = p;
+    }
+    return true;
+}
 
 
 Status DoList_Delete_By_Value(DoList *L, ElemType e) {
