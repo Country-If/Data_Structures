@@ -56,6 +56,13 @@ Status DoList_Insert_By_Order(DoList *L, int i, ElemType e);
 
 /* Delete */
 /*!
+ * Delete a node of the double linked list by the specific node
+ * @param L : pointer to the double linked list pointer
+ * @param p : pointer to the node to be deleted
+ */
+void DoList_Delete_By_Node(DoList *L, DoLNode *p);
+
+/*!
  * Delete a node of the double linked list by value
  * @param L : pointer to the double linked list pointer
  * @param e : the data of the node to be deleted

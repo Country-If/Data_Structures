@@ -72,19 +72,7 @@ Status DoList_Tail_Insert(DoList *L, ElemType e) {
 }
 
 
-Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {}
-
-
-Status DoList_Delete_By_Value(DoList *L, ElemType e) {
-    if (*L == NULL) {
-        return false;
-    }
-
-    DoLNode *p = DoList_Retrieve_By_Value(*L, e);
-    if (p == NULL) {
-        return false;
-    }
-
+void DoList_Delete_By_Node(DoList *L, DoLNode *p) {
     if (*L == p) {
         *L = p->next;
         if (p->next != NULL) {
@@ -99,6 +87,23 @@ Status DoList_Delete_By_Value(DoList *L, ElemType e) {
         }
         free(p);
     }
+}
+
+
+Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {}
+
+
+Status DoList_Delete_By_Value(DoList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    DoLNode *p = DoList_Retrieve_By_Value(*L, e);
+    if (p == NULL) {
+        return false;
+    }
+
+    DoList_Delete_By_Node(L, p);
     return true;
 }
 
@@ -113,20 +118,7 @@ Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e) {
         return input_error;
     }
 
-    if (*L == p) {
-        *L = p->next;
-        if (p->next != NULL) {
-            p->next->prior = NULL;
-        }
-        free(p);
-    }
-    else {
-        p->prior->next = p->next;
-        if (p->next != NULL) {
-            p->next->prior = p->prior;
-        }
-        free(p);
-    }
+    DoList_Delete_By_Node(L, p);
     return true;
 }
 
