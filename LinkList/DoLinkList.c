@@ -75,7 +75,32 @@ Status DoList_Tail_Insert(DoList *L, ElemType e) {
 Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {}
 
 
-Status DoList_Delete_By_Value(DoList *L, ElemType e) {}
+Status DoList_Delete_By_Value(DoList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    DoLNode *p = DoList_Retrieve_By_Value(*L, e);
+    if (p == NULL) {
+        return false;
+    }
+
+    if (*L == p) {
+        *L = p->next;
+        if (p->next != NULL) {
+            p->next->prior = NULL;
+        }
+        free(p);
+    }
+    else {
+        p->prior->next = p->next;
+        if (p->next != NULL) {
+            p->next->prior = p->prior;
+        }
+        free(p);
+    }
+    return true;
+}
 
 
 Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e) {}
