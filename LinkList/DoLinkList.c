@@ -81,10 +81,31 @@ Status DoList_Delete_By_Value(DoList *L, ElemType e) {}
 Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e) {}
 
 
-DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e) {}
+DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e) {
+    DoLNode *p = L;
+    while (p != NULL) {
+        if (p->data == e) {
+            break;
+        }
+        p = p->next;
+    }
+    return p;
+}
 
 
-Status DoList_Update_By_Value(DoList L, ElemType old, ElemType new) {}
+Status DoList_Update_By_Value(DoList L, ElemType old, ElemType new) {
+    if (L == NULL) {
+        return false;
+    }
+
+    DoLNode *p = DoList_Retrieve_By_Value(L, old);
+    if (p == NULL) {
+        return false;
+    }
+
+    p->data = new;
+    return true;
+}
 
 
 Status DoList_Update_By_Order(DoList L, int i, ElemType e) {}
