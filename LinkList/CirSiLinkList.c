@@ -49,7 +49,26 @@ Status CirSiList_Head_Insert(CirSiList L, ElemType e) {
 }
 
 
-Status CirSiList_Tail_Insert(CirSiList L, ElemType e) {}
+Status CirSiList_Tail_Insert(CirSiList L, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p = (CirSiLNode *) malloc(sizeof(CirSiLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    CirSiLNode *t = L->next;
+    while (t->next != L) {
+        t = t->next;
+    }
+
+    p->data = e;
+    p->next = L;
+    t->next = p;
+    return true;
+}
 
 
 Status CirSiList_Insert_By_Order(CirSiList L, int i, ElemType e) {}
