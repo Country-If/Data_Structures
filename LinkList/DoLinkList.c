@@ -154,7 +154,16 @@ void dolinklist_menu(void) {
                 get_order_position(&i);
                 get_input_element(&e);
                 system("cls");
-
+                result = DoList_Insert_By_Order(&L, i, e);
+                if (result == true) {
+                    printf("Succeeded!\n");
+                }
+                else {
+                    if (result == input_error) {
+                        printf("Out of bounds!\n");
+                    }
+                    printf("Failed!\n");
+                }
                 break;
             case 6:     // Delete a node by order
                 if (L == NULL) {
@@ -163,7 +172,16 @@ void dolinklist_menu(void) {
                 else {
                     get_order_position(&i);
                     system("cls");
-
+                    result = DoList_Delete_By_Order(&L, i, &e);
+                    if (result == true) {
+                        printf("Successfully deleted data: %d\n", e);
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 7:     // Delete a node by value
@@ -173,7 +191,12 @@ void dolinklist_menu(void) {
                 else {
                     get_input_element(&e);
                     system("cls");
-
+                    if (DoList_Delete_By_Value(&L, e) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
                 }
                 break;
             case 8:     // Update a node by order
@@ -184,7 +207,16 @@ void dolinklist_menu(void) {
                     get_order_position(&i);
                     get_input_element(&e);
                     system("cls");
-
+                    result = DoList_Update_By_Order(L, i, e);
+                    if (result == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        if (result == input_error) {
+                            printf("Out of bounds!\n");
+                        }
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 9:     // Update a node by value
@@ -195,7 +227,12 @@ void dolinklist_menu(void) {
                     get_input_element(&old);
                     get_input_element(&new);
                     system("cls");
-
+                    if (DoList_Update_By_Value(L, old, new) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Cannot find the element!\n");
+                    }
                 }
                 break;
             default:
