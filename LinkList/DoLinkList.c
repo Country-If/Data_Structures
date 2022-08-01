@@ -103,7 +103,32 @@ Status DoList_Delete_By_Value(DoList *L, ElemType e) {
 }
 
 
-Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e) {}
+Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    DoLNode *p = DoList_Retrieve_By_Order(*L, i);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    if (*L == p) {
+        *L = p->next;
+        if (p->next != NULL) {
+            p->next->prior = NULL;
+        }
+        free(p);
+    }
+    else {
+        p->prior->next = p->next;
+        if (p->next != NULL) {
+            p->next->prior = p->prior;
+        }
+        free(p);
+    }
+    return true;
+}
 
 
 DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e) {
@@ -114,6 +139,29 @@ DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e) {
         }
         p = p->next;
     }
+    return p;
+}
+
+
+DoLNode *DoList_Retrieve_By_Order(DoList L, int i) {
+    if (i < 1) {        // out of bounds
+        return NULL;
+    }
+
+    int j = 1;
+    DoLNode *p = L;
+    while (p->next != NULL) {
+        if (i == j) {
+            break;
+        }
+        p = p->next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return NULL;
+    }
+
     return p;
 }
 
@@ -133,7 +181,19 @@ Status DoList_Update_By_Value(DoList L, ElemType old, ElemType new) {
 }
 
 
-Status DoList_Update_By_Order(DoList L, int i, ElemType e) {}
+Status DoList_Update_By_Order(DoList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    DoLNode *p = DoList_Retrieve_By_Order(L, i);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    p->data = e;
+    return true;
+}
 
 
 void DoList_Traverse(DoList L, void(*visit)(ElemType e)) {
