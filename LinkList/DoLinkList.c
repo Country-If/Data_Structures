@@ -4,10 +4,24 @@
 
 #include "DoLinkList.h"
 
-void InitDoList(DoList *L) {}
+void InitDoList(DoList *L) {
+    *L = NULL;
+}
 
 
-Status DestroyDoList(DoList *L) {}
+Status DestroyDoList(DoList *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    DoLNode *p;
+    while (*L != NULL) {
+        p = *L;
+        *L = (*L)->next;
+        free(p);
+    }
+    return true;
+}
 
 
 Status DoList_Head_Insert(DoList *L, ElemType e) {}
@@ -34,7 +48,14 @@ Status DoList_Update_By_Value(DoList L, ElemType old, ElemType new) {}
 Status DoList_Update_By_Order(DoList L, int i, ElemType e) {}
 
 
-void DoList_Traverse(DoList L, void(*visit)(ElemType e)) {}
+void DoList_Traverse(DoList L, void(*visit)(ElemType e)) {
+    DoLNode *p = L;
+    while (p != NULL) {
+        visit(p->data);
+        p = p->next;
+    }
+    printf("NULL\n");
+}
 
 
 void dolinklist_menu(void) {
@@ -51,14 +72,20 @@ void dolinklist_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // Initialize
-
+                InitDoList(&L);
+                printf("Succeeded!\n");
                 break;
             case 2:     // Destroy
                 if (L == NULL) {
                     printf("The list is already NULL!\n");
                 }
                 else {
-
+                    if (DestroyDoList(&L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
                 }
                 break;
             case 3:     // Insert a node from head
@@ -125,12 +152,12 @@ void dolinklist_menu(void) {
         }
         if (choice >= 1 && choice <= 9) {
             printf("Current list: ");
-
+            DoList_Traverse(L, visit);
         }
     } while (choice != 0);
     // release memory
     if (L != NULL) {
-
+        DestroyDoList(&L);
     }
 }
 
