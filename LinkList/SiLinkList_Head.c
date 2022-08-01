@@ -148,6 +148,10 @@ Status SiList_Head_Delete_By_Order(SiList_Head L, int i, ElemType *e) {
 
 
 SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e) {
+    if (L == NULL) {
+        return NULL;
+    }
+
     SiLNode_Head *p = L->next;
     while (p != NULL) {
         if (p->data == e) {
@@ -160,6 +164,10 @@ SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e) {
 
 
 SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt) {
+    if (L == NULL) {
+        return NULL;
+    }
+
     if (i < 1) {        // out of bounds
         return NULL;
     }

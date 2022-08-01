@@ -172,6 +172,10 @@ DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e) {
 
 
 DoLNode *DoList_Retrieve_By_Order(DoList L, int i) {
+    if (L == NULL) {
+        return NULL;
+    }
+
     if (i < 1) {        // out of bounds
         return NULL;
     }
