@@ -82,7 +82,7 @@ Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e);
 /* Retrieve */
 /*!
  * Retrieve a node of the double linked list by value
- * @param L : pointer to a double linked list
+ * @param L : pointer to the double linked list
  * @param e : the data of the node to be retrieve
  * @return pointer to the result node if successfully retrieved else NULL
  */
@@ -99,7 +99,7 @@ DoLNode *DoList_Retrieve_By_Order(DoList L, int i);
 /* Update */
 /*!
  * Update a node of the double linked list by value
- * @param L : pointer to a double linked list
+ * @param L : pointer to the double linked list
  * @param old : the old data of the node to be updated
  * @param new : the new data of the node to be updated
  * @return status (true, false)
@@ -108,7 +108,7 @@ Status DoList_Update_By_Value(DoList L, ElemType old, ElemType new);
 
 /*!
  * Update a node of the double linked list by order
- * @param L : pointer to a double linked list
+ * @param L : pointer to the double linked list
  * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be updated
  * @return status (true, false, input_error)
@@ -118,8 +118,8 @@ Status DoList_Update_By_Order(DoList L, int i, ElemType e);
 /* Traverse */
 /*!
  * Traverse the double linked list
- * @param L : pointer to a double linked list
- * @param visit : function pointer to a function that prints the data of a node
+ * @param L : pointer to the double linked list
+ * @param visit : function pointer to the function that prints the data of a node
  */
 void DoList_Traverse(DoList L, void(*visit)(ElemType e));
 
