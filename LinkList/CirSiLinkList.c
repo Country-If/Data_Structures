@@ -74,7 +74,29 @@ Status CirSiList_Tail_Insert(CirSiList L, ElemType e) {
 Status CirSiList_Insert_By_Order(CirSiList L, int i, ElemType e) {}
 
 
-Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {}
+Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p_prior = L, *p = L->next;
+    while (p != L) {
+        if (p->data == e) {
+            break;
+        }
+        p_prior = p;
+        p = p->next;
+    }
+
+    if (p == L) {
+        return false;
+    }
+    else {
+        p_prior->next = p->next;
+        free(p);
+        return true;
+    }
+}
 
 
 Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e) {}
@@ -228,9 +250,6 @@ void cirsilist_menu(void) {
                     result = CirSiList_Delete_By_Order(L, i, &e);
                     if (result == true) {
                         printf("Successfully deleted data: %d\n", e);
-                        if (L->next == NULL) {
-                            printf("Current list: NULL\n");
-                        }
                     }
                     else {
                         if (result == input_error) {
@@ -249,9 +268,6 @@ void cirsilist_menu(void) {
                     system("cls");
                     if (CirSiList_Delete_By_Value(L, e) == true) {
                         printf("Succeeded!\n");
-                        if (L->next == NULL) {
-                            printf("Current list: NULL\n");
-                        }
                     }
                     else {
                         printf("Cannot find the element!\n");
@@ -298,7 +314,7 @@ void cirsilist_menu(void) {
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 9 && L != NULL && L->next != L) {
+        if (choice >= 3 && choice <= 9 && L != NULL) {
             printf("Current list: ");
             CirSiList_Traverse(L, visit);
         }
