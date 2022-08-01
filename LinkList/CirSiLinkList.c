@@ -80,13 +80,38 @@ Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {}
 Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e) {}
 
 
-CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e) {}
+CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e) {
+    if (L == NULL) {
+        return NULL;
+    }
+
+    CirSiLNode *p = L->next;
+    while (p != L) {
+        if (p->data == e) {
+            break;
+        }
+        p = p->next;
+    }
+    return p;
+}
 
 
 CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i) {}
 
 
-Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {}
+Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p = CirSiList_Retrieve_By_Value(L, old);
+    if (p == L) {
+        return false;
+    }
+
+    p->data = new;
+    return true;
+}
 
 
 Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e) {}

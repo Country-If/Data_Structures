@@ -77,7 +77,7 @@ Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e);
  * Retrieve a node of the circular single linked list (with a head node) by value
  * @param L : pointer to the circular single linked list
  * @param e : the data of the node to be retrieve
- * @return pointer to the result node if successfully retrieved else NULL
+ * @return pointer to the result node if successfully retrieved else head node
  */
 CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e);
 
@@ -85,7 +85,7 @@ CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e);
  * Retrieve a node of the circular single linked list (with a head node) by order (only used in update and delete function)
  * @param L : pointer to the circular single linked list
  * @param i : the order of a specific node, legitimate range: [1, n]
- * @return pointer to the result node if successfully retrieved else NULL
+ * @return pointer to the result node if successfully retrieved else head node
  */
 CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i);
 
