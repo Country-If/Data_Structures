@@ -20,11 +20,11 @@ Status DestroyCirSiList(CirSiList *L) {
         return false;
     }
 
-    CirSiLNode *p;
-    while ((*L)->next != *L) {
-        p = *L;
-        *L = (*L)->next;
-        free(p);
+    CirSiLNode *p = (*L)->next;
+    while (p != *L) {
+        p = p->next;
+        free((*L)->next);
+        (*L)->next = p;
     }
     free(*L);
     *L = NULL;
@@ -32,7 +32,21 @@ Status DestroyCirSiList(CirSiList *L) {
 }
 
 
-Status CirSiList_Head_Insert(CirSiList L, ElemType e) {}
+Status CirSiList_Head_Insert(CirSiList L, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirSiLNode *p = (CirSiLNode *) malloc(sizeof(CirSiLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    p->data = e;
+    p->next = L->next;
+    L->next = p;
+    return true;
+}
 
 
 Status CirSiList_Tail_Insert(CirSiList L, ElemType e) {}
