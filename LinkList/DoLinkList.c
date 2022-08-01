@@ -24,7 +24,26 @@ Status DestroyDoList(DoList *L) {
 }
 
 
-Status DoList_Head_Insert(DoList *L, ElemType e) {}
+Status DoList_Head_Insert(DoList *L, ElemType e) {
+    DoLNode *p = (DoLNode *) malloc(sizeof(DoLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    if (*L == NULL) {
+        *L = p;
+        (*L)->data = e;
+        (*L)->prior = NULL;
+        (*L)->next = NULL;
+    }
+    else {
+        p->data = e;
+        p->prior = NULL;
+        p->next = *L;
+        *L = p;
+    }
+    return true;
+}
 
 
 Status DoList_Tail_Insert(DoList *L, ElemType e) {}
@@ -91,7 +110,7 @@ void dolinklist_menu(void) {
             case 3:     // Insert a node from head
                 get_input_element(&e);
                 system("cls");
-
+                DoList_Head_Insert(&L, e);
                 break;
             case 4:     // Insert a node from tail
                 get_input_element(&e);

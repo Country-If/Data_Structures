@@ -9,6 +9,7 @@
 
 typedef struct DoLNode {
     ElemType data;
+    struct DoLNode *prior;
     struct DoLNode *next;
 } DoLNode, *DoList;
 
