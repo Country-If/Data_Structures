@@ -5,9 +5,9 @@
 #include "LinkList.h"
 #include "SiLinkList_Head.h"        // single linked list (with a head node)
 #include "SiLinkList_noHead.h"      // single linked list (without a head node)
-#include "DoLinkList.h"             // double linked list
-#include "CirSiLinkList.h"          // circular single linked list
-#include "CirDoLinkList.h"          // circular double linked list
+#include "DoLinkList.h"             // double linked list (without a head node)
+#include "CirSiLinkList.h"          // circular single linked list (with a head node)
+#include "CirDoLinkList.h"          // circular double linked list (without a head node)
 #include "StaLinkList.h"            // static linked list
 
 void linklist_menu(void) {
@@ -29,7 +29,7 @@ void linklist_menu(void) {
                 dolinklist_menu();
                 break;
             case 4:     // circular single linked list
-
+                cirsilist_menu();
                 break;
             case 5:     // circular double linked list
 
