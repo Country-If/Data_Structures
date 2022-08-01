@@ -50,19 +50,19 @@ void linklist_menu_show_details(void) {
     printf("\t******************************************************\n");
     printf("\t*                 Linked List                        *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  1  |   Single linked list (with a head node)      *\n");
+    printf("\t*  1  |  Single linked list (with a head node)       *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  2  |   Single Linked List (without a head node)   *\n");
+    printf("\t*  2  |  Single Linked List (without a head node)    *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  3  |   Double linked list                         *\n");
+    printf("\t*  3  |  Double linked list (without head)           *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  4  |   Circular single linked list                *\n");
+    printf("\t*  4  |  Circular single linked list (with head)     *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  5  |   Circular double linked list                *\n");
+    printf("\t*  5  |  Circular double linked list (without head)  *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  6  |   Static linked list                         *\n");
+    printf("\t*  6  |  Static linked list                          *\n");
     printf("\t*----------------------------------------------------*\n");
-    printf("\t*  0  |   Back                                       *\n");
+    printf("\t*  0  |  Back                                        *\n");
     printf("\t******************************************************\n");
     printf("\nPlease enter the corresponding number(0-6): ");
 }

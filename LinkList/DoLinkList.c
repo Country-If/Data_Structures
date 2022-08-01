@@ -388,7 +388,7 @@ void dolinklist_menu(void) {
 void dolinklist_menu_show_details(void) {
     printf("\n");
     printf("\t**************************************************\n");
-    printf("\t*              Double Linked List                *\n");
+    printf("\t*        Double Linked List (without head)       *\n");
     printf("\t*------------------------------------------------*\n");
     printf("\t*  1  |   Initialize (Reset)                     *\n");
     printf("\t*------------------------------------------------*\n");
