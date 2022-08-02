@@ -71,7 +71,36 @@ Status CirSiList_Tail_Insert(CirSiList L, ElemType e) {
 }
 
 
-Status CirSiList_Insert_By_Order(CirSiList L, int i, ElemType e) {}
+Status CirSiList_Insert_By_Order(CirSiList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    if (i < 1) {            // out of bounds
+        return input_error;
+    }
+
+    CirSiLNode *p = (CirSiLNode *) malloc(sizeof(CirSiLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    int j = 0;
+    CirSiLNode *t = L;
+    while (t->next != L && i != j + 1) {        // find the insert position (prior node)
+        t = t->next;
+        j++;
+    }
+
+    if (i > j + 1) {        // out of bounds
+        return input_error;
+    }
+
+    p->data = e;
+    p->next = t->next;
+    t->next = p;
+    return true;
+}
 
 
 Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {
