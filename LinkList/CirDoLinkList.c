@@ -26,7 +26,28 @@ Status DestroyCirDoList(CirDoList *L) {
 }
 
 
-Status CirDoList_Head_Insert(CirDoList *L, ElemType e) {}
+Status CirDoList_Head_Insert(CirDoList *L, ElemType e) {
+    CirDoLNode *p = (CirDoLNode *) malloc(sizeof(CirDoLNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    if (*L == NULL) {
+        *L = p;
+        (*L)->data = e;
+        (*L)->prior = *L;
+        (*L)->next = *L;
+    }
+    else {
+        p->data = e;
+        p->prior = (*L)->prior;
+        p->next = *L;
+        (*L)->prior->next = p;
+        (*L)->prior = p;
+        *L = p;
+    }
+    return true;
+}
 
 
 Status CirDoList_Tail_Insert(CirDoList *L, ElemType e) {}
@@ -58,9 +79,11 @@ Status CirDoList_Update_By_Order(CirDoList L, int i, ElemType e) {}
 
 void CirDoList_Traverse(CirDoList L, void(*visit)(ElemType e)) {
     CirDoLNode *p = L;
-    while (p != L) {
-        visit(p->data);
-        p = p->next;
+    if (L != NULL) {
+        do {
+            visit(p->data);
+            p = p->next;
+        } while (p != L);
     }
     printf("NULL\n");
 }
