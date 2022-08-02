@@ -104,7 +104,7 @@ Status CirSiList_Insert_By_Order(CirSiList L, int i, ElemType e) {
 
 
 Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {
-    if (L == NULL) {
+    if (L == NULL || L->next == L) {
         return false;
     }
 
@@ -175,7 +175,7 @@ CirSiLNode *CirSiList_Retrieve_By_Order(CirSiList L, int i) {
 
 
 Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
-    if (L == NULL) {
+    if (L == NULL || L->next == L) {
         return false;
     }
 
@@ -190,7 +190,7 @@ Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new) {
 
 
 Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e) {
-    if (L == NULL) {
+    if (L == NULL || L->next == L) {
         return false;
     }
 
