@@ -128,7 +128,35 @@ Status CirSiList_Delete_By_Value(CirSiList L, ElemType e) {
 }
 
 
-Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e) {}
+Status CirSiList_Delete_By_Order(CirSiList L, int i, ElemType *e) {
+    if (L == NULL || L->next == L) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    int j = 1;
+    CirSiLNode *p_prior = L, *p = L->next;  // p points to the node to be deleted, p_prior points to the prior node of p
+    while (p->next != L) {
+        if (i == j) {
+            break;
+        }
+        p_prior = p;
+        p = p->next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return input_error;
+    }
+
+    p_prior->next = p->next;
+    *e = p->data;
+    free(p);
+    return true;
+}
 
 
 CirSiLNode *CirSiList_Retrieve_By_Value(CirSiList L, ElemType e) {
