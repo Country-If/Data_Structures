@@ -107,7 +107,19 @@ Status CirDoList_Delete_By_Value(CirDoList *L, ElemType e) {
 }
 
 
-Status CirDoList_Delete_By_Order(CirDoList *L, int i, ElemType *e) {}
+Status CirDoList_Delete_By_Order(CirDoList *L, int i, ElemType *e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    CirDoLNode *p = CirDoList_Retrieve_By_Order(*L, i);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    CirDoList_Delete_By_Node(L, p);
+    return true;
+}
 
 
 CirDoLNode *CirDoList_Retrieve_By_Value(CirDoList L, ElemType e) {
