@@ -4,10 +4,26 @@
 
 #include "CirDoLinkList.h"
 
-void InitCirDoList(CirDoList *L) {}
+void InitCirDoList(CirDoList *L) {
+    *L = NULL;
+}
 
 
-Status DestroyCirDoList(CirDoList *L) {}
+Status DestroyCirDoList(CirDoList *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    CirDoLNode *p = (*L)->next;
+    while (p != *L) {
+        p = p->next;
+        free((*L)->next);
+        (*L)->next = p;
+    }
+    free(*L);
+    *L = NULL;
+    return true;
+}
 
 
 Status CirDoList_Head_Insert(CirDoList *L, ElemType e) {}
@@ -40,7 +56,14 @@ Status CirDoList_Update_By_Value(CirDoList L, ElemType old, ElemType new) {}
 Status CirDoList_Update_By_Order(CirDoList L, int i, ElemType e) {}
 
 
-void CirDoList_Traverse(CirDoList L, void(*visit)(ElemType e)) {}
+void CirDoList_Traverse(CirDoList L, void(*visit)(ElemType e)) {
+    CirDoLNode *p = L;
+    while (p != L) {
+        visit(p->data);
+        p = p->next;
+    }
+    printf("NULL\n");
+}
 
 
 void cirdolinklist_menu(void) {
