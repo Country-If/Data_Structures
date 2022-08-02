@@ -72,24 +72,6 @@ Status DoList_Tail_Insert(DoList *L, ElemType e) {
 }
 
 
-void DoList_Delete_By_Node(DoList *L, DoLNode *p) {
-    if (*L == p) {
-        *L = p->next;
-        if (p->next != NULL) {
-            p->next->prior = NULL;
-        }
-        free(p);
-    }
-    else {
-        p->prior->next = p->next;
-        if (p->next != NULL) {
-            p->next->prior = p->prior;
-        }
-        free(p);
-    }
-}
-
-
 Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {
     if (i < 1) {        // out of bounds
         return input_error;
@@ -126,6 +108,24 @@ Status DoList_Insert_By_Order(DoList *L, int i, ElemType e) {
         t->next = p;
     }
     return true;
+}
+
+
+void DoList_Delete_By_Node(DoList *L, DoLNode *p) {
+    if (*L == p) {
+        *L = p->next;
+        if (p->next != NULL) {
+            p->next->prior = NULL;
+        }
+        free(p);
+    }
+    else {
+        p->prior->next = p->next;
+        if (p->next != NULL) {
+            p->next->prior = p->prior;
+        }
+        free(p);
+    }
 }
 
 
