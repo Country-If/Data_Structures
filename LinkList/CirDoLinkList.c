@@ -127,7 +127,29 @@ CirDoLNode *CirDoList_Retrieve_By_Value(CirDoList L, ElemType e) {
 }
 
 
-CirDoLNode *CirDoList_Retrieve_By_Order(CirDoList L, int i) {}
+CirDoLNode *CirDoList_Retrieve_By_Order(CirDoList L, int i) {
+    if (i < 1) {        // out of bounds
+        return NULL;
+    }
+
+    int j = 1;
+    CirDoLNode *p = L;
+    if (L != NULL) {
+        do {
+            if (i == j) {
+                break;
+            }
+            p = p->next;
+            j++;
+        } while (p->next != L);
+
+        if (i > j) {        // out of bounds
+            return NULL;
+        }
+    }
+
+    return p;
+}
 
 
 Status CirDoList_Update_By_Value(CirDoList L, ElemType old, ElemType new) {
@@ -145,7 +167,19 @@ Status CirDoList_Update_By_Value(CirDoList L, ElemType old, ElemType new) {
 }
 
 
-Status CirDoList_Update_By_Order(CirDoList L, int i, ElemType e) {}
+Status CirDoList_Update_By_Order(CirDoList L, int i, ElemType e) {
+    if (L == NULL) {
+        return false;
+    }
+
+    CirDoLNode *p = CirDoList_Retrieve_By_Order(L, i);
+    if (p == NULL) {
+        return input_error;
+    }
+
+    p->data = e;
+    return true;
+}
 
 
 void CirDoList_Traverse(CirDoList L, void(*visit)(ElemType e)) {
