@@ -76,10 +76,35 @@ Status CirDoList_Tail_Insert(CirDoList *L, ElemType e) {
 Status CirDoList_Insert_By_Order(CirDoList *L, int i, ElemType e) {}
 
 
-void CirDoList_Delete_By_Node(CirDoList *L, CirDoLNode *p) {}
+void CirDoList_Delete_By_Node(CirDoList *L, CirDoLNode *p) {
+    if (p == p->next) {
+        *L = NULL;
+        free(p);
+    }
+    else {
+        p->prior->next = p->next;
+        p->next->prior = p->prior;
+        if (p == *L) {
+            *L = p->next;
+        }
+        free(p);
+    }
+}
 
 
-Status CirDoList_Delete_By_Value(CirDoList *L, ElemType e) {}
+Status CirDoList_Delete_By_Value(CirDoList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    CirDoLNode *p = CirDoList_Retrieve_By_Value(*L, e);
+    if (p == NULL) {
+        return false;
+    }
+
+    CirDoList_Delete_By_Node(L, p);
+    return true;
+}
 
 
 Status CirDoList_Delete_By_Order(CirDoList *L, int i, ElemType *e) {}
@@ -93,10 +118,10 @@ CirDoLNode *CirDoList_Retrieve_By_Value(CirDoList L, ElemType e) {
                 break;
             }
             p = p->next;
-        } while (p != L);
-    }
-    if (p->data != e) {
-        p = NULL;
+        } while (p->next != L);
+        if (p->data != e) {
+            p = NULL;
+        }
     }
     return p;
 }
