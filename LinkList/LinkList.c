@@ -32,7 +32,7 @@ void linklist_menu(void) {
                 cirsilist_menu();
                 break;
             case 5:     // circular double linked list
-
+                cirdolinklist_menu();
                 break;
             case 6:     // static linked list
 
