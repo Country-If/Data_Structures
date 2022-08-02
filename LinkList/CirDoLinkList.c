@@ -73,7 +73,50 @@ Status CirDoList_Tail_Insert(CirDoList *L, ElemType e) {
 }
 
 
-Status CirDoList_Insert_By_Order(CirDoList *L, int i, ElemType e) {}
+Status CirDoList_Insert_By_Order(CirDoList *L, int i, ElemType e) {
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    CirDoLNode *p = (CirDoLNode *) malloc(sizeof(CirDoLNode));
+    if (p == NULL) {
+        return false;
+    }
+    p->data = e;
+
+    if (i == 1) {
+        if (*L == NULL) {
+            *L = p;
+            (*L)->prior = *L;
+            (*L)->next = *L;
+        }
+        else {
+            p->prior = (*L)->prior;
+            p->next = *L;
+            (*L)->prior->next = p;
+            (*L)->prior = p;
+            *L = p;
+        }
+    }
+    else {
+        int j = 1;
+        CirDoLNode *t = *L;
+        while (t->next != *L && i != j + 1) {       // find the insert position (prior node)
+            t = t->next;
+            j++;
+        }
+
+        if (i > j + 1) {        // out of bounds
+            return input_error;
+        }
+
+        p->prior = t;
+        p->next = t->next;
+        t->next->prior = p;
+        t->next = p;
+    }
+    return true;
+}
 
 
 void CirDoList_Delete_By_Node(CirDoList *L, CirDoLNode *p) {
