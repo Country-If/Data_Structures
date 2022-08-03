@@ -76,10 +76,17 @@ Status StaList_Delete_By_Order(StaLinkList *L, int i, ElemType *e);
 
 /* Retrieve */
 /*!
+ * Retrieve an unused position to be inserted
+ * @param L : pointer to the static linked list array
+ * @return position of the result node if successfully retrieved else -1
+ */
+int StaList_Retrieve_Position(StaLinkList *L);
+
+/*!
  * Retrieve a node of the static linked list (with a head node) by value
  * @param L : pointer to the static linked list array
  * @param e : the data of the node to be retrieve
- * @return pointer to the result node if successfully retrieved else NULL
+ * @return position of the result node if successfully retrieved else -1
  */
 int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e);
 
@@ -87,7 +94,7 @@ int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e);
  * Retrieve a node of the static linked list (with a head node) by order
  * @param L : pointer to the static linked list array
  * @param i : the order of a specific node, legitimate range: [1, n]
- * @return pointer to the result node if successfully retrieved else NULL
+ * @return position of the result node if successfully retrieved else -1
  */
 int StaList_Retrieve_By_Order(StaLinkList *L, int i);
 

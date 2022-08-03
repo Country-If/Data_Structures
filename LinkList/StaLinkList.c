@@ -10,8 +10,9 @@ Status InitStaList(StaLinkList **L) {
         return false;
     }
 
-    for (int i = 0; i < MaxSize; i++) {
-        (**L)[i].next = -1;
+    (**L)[0].next = -1;             // -1: end position of the list
+    for (int i = 1; i < MaxSize; i++) {
+        (**L)[i].next = -2;         // -2: unused node
     }
     return true;
 }
@@ -28,7 +29,33 @@ Status DestroyStaList(StaLinkList **L) {
 }
 
 
-Status StaList_Head_Insert(StaLinkList *L, ElemType e) {}
+int StaList_Retrieve_Position(StaLinkList *L) {
+    int pos;
+    for (int i = 1; i < MaxSize; i++) {
+        pos = (*L)[i].next;
+        if (pos == -2) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+Status StaList_Head_Insert(StaLinkList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    int pos = StaList_Retrieve_Position(L);
+    if (pos == -1) {
+        return false;
+    }
+
+    (*L)[pos].data = e;
+    (*L)[pos].next = (*L)[0].next;
+    (*L)[0].next = pos;
+    return true;
+}
 
 
 Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {}
@@ -56,14 +83,14 @@ Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {}
 
 
 Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {
-    if (L == NULL) {
+    if (*L == NULL) {
         return false;
     }
 
-    int i = L[0]->next;
+    int i = (*L)[0].next;
     while (i != -1) {
-        visit(L[i]->data);
-        i = L[i]->next;
+        visit((*L)[i].data);
+        i = (*L)[i].next;
     }
 
     printf("NULL\n");
