@@ -48,7 +48,7 @@ Status StaList_Head_Insert(StaLinkList *L, ElemType e) {
 
     int pos = StaList_Retrieve_Position(L);
     if (pos == -1) {
-        return false;
+        return list_full;
     }
 
     (*L)[pos].data = e;
@@ -65,7 +65,7 @@ Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {
 
     int pos = StaList_Retrieve_Position(L);
     if (pos == -1) {
-        return false;
+        return list_full;
     }
 
     int t = 0;
@@ -83,7 +83,36 @@ Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {
 }
 
 
-Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e) {}
+Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    int pos = StaList_Retrieve_Position(L);
+    if (pos == -1) {
+        return list_full;
+    }
+
+    int j = 0;
+    int t = 0;
+    while ((*L)[t].next != -1 && i != j + 1) {
+        t = (*L)[t].next;
+        j++;
+    }
+
+    if (i > j + 1) {        // out of bounds;
+        return input_error;
+    }
+
+    (*L)[pos].data = e;
+    (*L)[pos].next = (*L)[t].next;
+    (*L)[t].next = pos;
+    return true;
+}
 
 
 Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {
@@ -273,10 +302,14 @@ void stalinklist_menu(void) {
                 else {
                     get_input_element(&e);
                     system("cls");
-                    if (StaList_Head_Insert(L, e) == true) {
+                    result = StaList_Head_Insert(L, e);
+                    if (result == true) {
                         printf("Succeeded!\n");
                     }
                     else {
+                        if (result == list_full) {
+                            printf("List is already full!\n");
+                        }
                         printf("Failed!\n");
                     }
                 }
@@ -288,10 +321,14 @@ void stalinklist_menu(void) {
                 else {
                     get_input_element(&e);
                     system("cls");
-                    if (StaList_Tail_Insert(L, e) == true) {
+                    result = StaList_Tail_Insert(L, e);
+                    if (result == true) {
                         printf("Succeeded!\n");
                     }
                     else {
+                        if (result == list_full) {
+                            printf("List is already full!\n");
+                        }
                         printf("Failed!\n");
                     }
                 }
@@ -311,6 +348,9 @@ void stalinklist_menu(void) {
                     else {
                         if (result == input_error) {
                             printf("Out of bounds!\n");
+                        }
+                        else if (result == list_full) {
+                            printf("List is already full!\n");
                         }
                         printf("Failed!\n");
                     }

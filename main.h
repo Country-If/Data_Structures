@@ -19,6 +19,7 @@ typedef enum Status {
     false,
     true,
     input_error,
+    list_full,
 } Status;
 
 /*!
