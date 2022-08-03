@@ -206,7 +206,7 @@ int StaList_Retrieve_By_Order(StaLinkList *L, int i) {
         j++;
     }
 
-    if (i > j) {
+    if (i > j) {        // out of bounds
         return -1;
     }
 
