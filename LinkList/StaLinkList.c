@@ -58,7 +58,29 @@ Status StaList_Head_Insert(StaLinkList *L, ElemType e) {
 }
 
 
-Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {}
+Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    int pos = StaList_Retrieve_Position(L);
+    if (pos == -1) {
+        return false;
+    }
+
+    int t = 0;
+    while (t < MaxSize) {       // find tail position
+        if ((*L)[t].next == -1) {
+            break;
+        }
+        t++;
+    }
+
+    (*L)[pos].data = e;
+    (*L)[pos].next = (*L)[t].next;
+    (*L)[t].next = pos;
+    return true;
+}
 
 
 Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e) {}
