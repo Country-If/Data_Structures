@@ -23,14 +23,6 @@ typedef enum Status {
 } Status;
 
 /*!
- * enumerate the option type
- */
-typedef enum OptType {
-    insert,
-    update,
-} OptType;
-
-/*!
  * Visit a node and print its value
  * @param e : the data of the node visited
  */

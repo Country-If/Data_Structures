@@ -74,25 +74,35 @@ Status SiList_Head_Insert_By_Order(SiList_Head L, int i, ElemType e) {
         return false;
     }
 
-    SiLNode_Head *p = SiList_Head_Retrieve_By_Order(L, i, insert);
-    if (p == NULL) {
+    if (i < 1) {        // out of bounds
         return input_error;
     }
 
-    SiLNode_Head *t = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
-    if (t == NULL) {
+    SiLNode_Head *p = (SiLNode_Head *) malloc(sizeof(SiLNode_Head));
+    if (p == NULL) {
         return false;
     }
 
-    t->data = e;
-    t->next = p->next;
-    p->next = t;
+    int j = 0;
+    SiLNode_Head *t = L;
+    while (t->next != NULL && i != j + 1) {        // find the insert position (prior node)
+        t = t->next;
+        j++;
+    }
+
+    if (i > j + 1) {        // out of bounds
+        return input_error;
+    }
+
+    p->data = e;
+    p->next = t->next;
+    t->next = p;
     return true;
 }
 
 
 Status SiList_Head_Delete_By_Value(SiList_Head L, ElemType e) {
-    if (L == NULL) {
+    if (L == NULL || L->next == NULL) {
         return false;
     }
 
@@ -163,7 +173,7 @@ SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e) {
 }
 
 
-SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt) {
+SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i) {
     if (L == NULL) {
         return NULL;
     }
@@ -172,37 +182,26 @@ SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt) {
         return NULL;
     }
 
-    int j = 0;
-    SiLNode_Head *p = L;
+    int j = 1;
+    SiLNode_Head *p = L->next;
     while (p != NULL) {         // find the position
-        if (j + 1 == i) {
+        if (i == j) {
             break;
         }
         p = p->next;
         j++;
     }
 
-
-    if (i > j + 1) {        // out of bounds
+    if (i > j) {        // out of bounds
         return NULL;
     }
 
-    if (opt == insert) {
-        return p;
-    }
-    else if (opt == update) {
-        if (p == NULL) {
-            return NULL;
-        }
-        else {
-            return p->next;
-        }
-    }
+    return p;
 }
 
 
 Status SiList_Head_Update_By_Value(SiList_Head L, ElemType old, ElemType new) {
-    if (L == NULL) {
+    if (L == NULL || L->next == NULL) {
         return false;
     }
 
@@ -217,11 +216,11 @@ Status SiList_Head_Update_By_Value(SiList_Head L, ElemType old, ElemType new) {
 
 
 Status SiList_Head_Update_By_Order(SiList_Head L, int i, ElemType e) {
-    if (L == NULL) {
+    if (L == NULL || L->next == NULL) {
         return false;
     }
 
-    SiLNode_Head *p = SiList_Head_Retrieve_By_Order(L, i, update);
+    SiLNode_Head *p = SiList_Head_Retrieve_By_Order(L, i);
     if (p == NULL) {
         return input_error;
     }

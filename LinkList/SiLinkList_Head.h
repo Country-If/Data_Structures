@@ -83,13 +83,12 @@ Status SiList_Head_Delete_By_Order(SiList_Head L, int i, ElemType *e);
 SiLNode_Head *SiList_Head_Retrieve_By_Value(SiList_Head L, ElemType e);
 
 /*!
- * Retrieve a node of the single linked list (with a head node) by order
+ * Retrieve a node of the single linked list (with a head node) by order (only used in update and delete function)
  * @param L : pointer to the single linked list
- * @param i : the order of a specific node, legitimate range: [1, n + 1] if opt is insert else [1, n]
- * @param opt : the option type: insert or update
- * @return pointer to the prior node of the query node if OptType is insert else pointer to the query node if OptType is update else NULL
+ * @param i : the order of a specific node, legitimate range: [1, n]
+ * @return pointer to the result node if successfully retrieved else NULL or head node
  */
-SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i, OptType opt);
+SiLNode_Head *SiList_Head_Retrieve_By_Order(SiList_Head L, int i);
 
 /* Update */
 /*!
