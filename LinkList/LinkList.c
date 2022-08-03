@@ -8,10 +8,10 @@
 #include "DoLinkList.h"             // double linked list (without a head node)
 #include "CirSiLinkList.h"          // circular single linked list (with a head node)
 #include "CirDoLinkList.h"          // circular double linked list (without a head node)
-#include "StaLinkList.h"            // static linked list
+#include "StaLinkList.h"            // static linked list (with a head node)
 
 void linklist_menu(void) {
-    int choice = 0;
+    int choice;
     do {
         linklist_menu_show_details();
         choice = judge_int();
@@ -35,7 +35,7 @@ void linklist_menu(void) {
                 cirdolinklist_menu();
                 break;
             case 6:     // static linked list
-
+                stalinklist_menu();
                 break;
             default:
                 printf("Wrong input, please re-enter!\n");
