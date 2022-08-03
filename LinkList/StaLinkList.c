@@ -55,7 +55,20 @@ Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new) {}
 Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {}
 
 
-Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {}
+Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {
+    if (L == NULL) {
+        return false;
+    }
+
+    int i = L[0]->next;
+    while (i != -1) {
+        visit(L[i]->data);
+        i = L[i]->next;
+    }
+
+    printf("NULL\n");
+    return true;
+}
 
 
 void stalinklist_menu(void) {
