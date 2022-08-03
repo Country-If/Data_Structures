@@ -87,7 +87,7 @@ Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e) {}
 
 
 Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {
-    if (*L == NULL) {
+    if (*L == NULL || (*L)[0].next == -1) {
         return false;
     }
 
@@ -111,7 +111,35 @@ Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {
 }
 
 
-Status StaList_Delete_By_Order(StaLinkList *L, int i, ElemType *e) {}
+Status StaList_Delete_By_Order(StaLinkList *L, int i, ElemType *e) {
+    if (*L == NULL || (*L)[0].next == -1) {
+        return false;
+    }
+
+    if (i < 1) {        // out of bounds
+        return input_error;
+    }
+
+    int j = 1;
+    int p_prior = 0, p = (*L)[0].next;
+    while ((*L)[p].next != -1) {
+        if (i == j) {
+            break;
+        }
+        p_prior = p;
+        p = (*L)[p].next;
+        j++;
+    }
+
+    if (i > j) {        // out of bounds
+        return input_error;
+    }
+
+    (*L)[p_prior].next = (*L)[p].next;
+    *e = (*L)[p].data;
+    (*L)[p].next = -2;
+    return true;
+}
 
 
 int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e) {
@@ -289,7 +317,7 @@ void stalinklist_menu(void) {
                 }
                 break;
             case 6:     // Delete a node by order
-                if (L == NULL || L[0]->next == -1) {
+                if (L == NULL || (*L)[0].next == -1) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -308,7 +336,7 @@ void stalinklist_menu(void) {
                 }
                 break;
             case 7:     // Delete a node by value
-                if (L == NULL || L[0]->next == -1) {
+                if (L == NULL || (*L)[0].next == -1) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -323,7 +351,7 @@ void stalinklist_menu(void) {
                 }
                 break;
             case 8:     // Update a node by order
-                if (L == NULL || L[0]->next == -1) {
+                if (L == NULL || (*L)[0].next == -1) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -343,7 +371,7 @@ void stalinklist_menu(void) {
                 }
                 break;
             case 9:     // Update a node by value
-                if (L == NULL || L[0]->next == -1) {
+                if (L == NULL || (*L)[0].next == -1) {
                     printf("The list is NULL!\n");
                 }
                 else {
