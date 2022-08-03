@@ -86,7 +86,29 @@ Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {
 Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e) {}
 
 
-Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {}
+Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    int p_prior = 0, p = (*L)[0].next;
+    while (p != -1) {       // find the position
+        if ((*L)[p].data == e) {
+            break;
+        }
+        p_prior = p;
+        p = (*L)[p].next;
+    }
+
+    if (p == -1) {
+        return false;
+    }
+    else {
+        (*L)[p_prior].next = (*L)[p].next;
+        (*L)[p].next = -2;
+        return true;
+    }
+}
 
 
 Status StaList_Delete_By_Order(StaLinkList *L, int i, ElemType *e) {}
