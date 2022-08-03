@@ -3,14 +3,13 @@
 #include "LinkList/LinkList.h"      // Linked List
 
 int main() {
-    int choice = 0;
+    int choice;
     do {
         main_menu();
         choice = judge_int();
         system("cls");
         switch (choice) {
             case 0:     // exit
-
                 break;
             case 1:     // array
 
@@ -36,7 +35,6 @@ int main() {
         }
     } while (choice != 0);
 
-//    system("pause");
     return 0;
 }
 
