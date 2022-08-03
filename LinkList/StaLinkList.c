@@ -92,13 +92,38 @@ Status StaList_Delete_By_Value(StaLinkList *L, ElemType e) {}
 Status StaList_Delete_By_Order(StaLinkList *L, int i, ElemType *e) {}
 
 
-int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e) {}
+int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e) {
+    if (*L == NULL) {
+        return -1;
+    }
+
+    int pos = (*L)[0].next;
+    while (pos != -1) {
+        if ((*L)[pos].data == e) {
+            break;
+        }
+        pos = (*L)[pos].next;
+    }
+    return pos;
+}
 
 
 int StaList_Retrieve_By_Order(StaLinkList *L, int i) {}
 
 
-Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new) {}
+Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    int pos = StaList_Retrieve_By_Value(L, old);
+    if (pos == -1) {
+        return false;
+    }
+
+    (*L)[pos].data = new;
+    return true;
+}
 
 
 Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {}
