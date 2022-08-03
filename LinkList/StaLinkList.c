@@ -130,11 +130,35 @@ int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e) {
 }
 
 
-int StaList_Retrieve_By_Order(StaLinkList *L, int i) {}
+int StaList_Retrieve_By_Order(StaLinkList *L, int i) {
+    if (*L == NULL) {
+        return -1;
+    }
+
+    if (i < 1) {        // out of bounds
+        return -1;
+    }
+
+    int j = 1;
+    int pos = (*L)[0].next;
+    while (pos != -1) {
+        if (i == j) {
+            break;
+        }
+        pos = (*L)[pos].next;
+        j++;
+    }
+
+    if (i > j) {
+        return -1;
+    }
+
+    return pos;
+}
 
 
 Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new) {
-    if (*L == NULL) {
+    if (*L == NULL || (*L)[0].next == -1) {
         return false;
     }
 
@@ -148,7 +172,19 @@ Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new) {
 }
 
 
-Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {}
+Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {
+    if (*L == NULL || (*L)[0].next == -1) {
+        return false;
+    }
+
+    int pos = StaList_Retrieve_By_Order(L, i);
+    if (pos == -1) {
+        return input_error;
+    }
+
+    (*L)[pos].data = e;
+    return true;
+}
 
 
 Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {
