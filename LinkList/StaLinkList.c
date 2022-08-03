@@ -4,10 +4,28 @@
 
 #include "StaLinkList.h"
 
-Status InitStaList(StaLinkList *L) {}
+Status InitStaList(StaLinkList **L) {
+    *L = (StaLinkList *) malloc(sizeof(StaLinkList) * MaxSize);     // array head pointer
+    if (*L == NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < MaxSize; i++) {
+        (**L)[i].next = -1;
+    }
+    return true;
+}
 
 
-Status DestroyStaList(StaLinkList *L) {}
+Status DestroyStaList(StaLinkList **L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    free(*L);
+    *L = NULL;
+    return true;
+}
 
 
 Status StaList_Head_Insert(StaLinkList *L, ElemType e) {}
@@ -39,6 +57,7 @@ Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {}
 
 Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {}
 
+
 void stalinklist_menu(void) {
     int choice;
     StaLinkList *L = NULL;
@@ -53,7 +72,7 @@ void stalinklist_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // Initialize
-                if (InitStaList(L) == true) {
+                if (InitStaList(&L) == true) {
                     printf("Succeeded!\n");
                     printf("Current list: NULL\n");
                 }
@@ -66,7 +85,7 @@ void stalinklist_menu(void) {
                     printf("The list is already NULL!\n");
                 }
                 else {
-                    if (DestroyStaList(L) == true) {
+                    if (DestroyStaList(&L) == true) {
                         printf("Succeeded!\n");
                     }
                     else {
@@ -205,7 +224,7 @@ void stalinklist_menu(void) {
     } while (choice != 0);
     // release memory
     if (L != NULL) {
-        DestroyStaList(L);
+        DestroyStaList(&L);
     }
 }
 

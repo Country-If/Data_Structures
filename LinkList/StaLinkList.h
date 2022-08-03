@@ -17,18 +17,18 @@ typedef struct {
 /* Create */
 /*!
  * Initialize or reset the static linked list (with a head node)
- * @param L : pointer to the static linked list array
+ * @param L : pointer to the static linked list array pointer
  * @return status (true, false)
  */
-Status InitStaList(StaLinkList *L);
+Status InitStaList(StaLinkList **L);
 
 /* Destroy */
 /*!
  * Destroy the static linked list (with a head node)
- * @param L : pointer to the static linked list array
+ * @param L : pointer to the static linked list array pointer
  * @return status (true, false)
  */
-Status DestroyStaList(StaLinkList *L);
+Status DestroyStaList(StaLinkList **L);
 
 /* Insert */
 /*!
