@@ -95,10 +95,33 @@ Status SeqList_Delete_By_Value(SeqList *L, ElemType e) {}
 Status SeqList_Delete_By_Order(SeqList *L, int i, ElemType *e) {}
 
 
-int SeqList_Retrieve_By_Value(SeqList *L, ElemType e) {}
+int SeqList_Retrieve_By_Value(SeqList *L, ElemType e) {
+    if ((*L).data == NULL) {
+        return -1;
+    }
+
+    for (int i = 0; i < (*L).length; i++) {
+        if ((*L).data[i] == e) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 
-Status SeqList_Update_By_Value(SeqList *L, ElemType old, ElemType new) {}
+Status SeqList_Update_By_Value(SeqList *L, ElemType old, ElemType new) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    int pos = SeqList_Retrieve_By_Value(L, old);
+    if (pos == -1) {
+        return false;
+    }
+
+    (*L).data[pos] = new;
+    return true;
+}
 
 
 Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e) {}
