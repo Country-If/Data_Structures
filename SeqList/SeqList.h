@@ -26,9 +26,8 @@ Status InitSeqList(SeqList *L);
 /*!
  * Destroy the sequential list
  * @param L : pointer to the sequential list
- * @return status (true, false)
  */
-Status DestroySeqList(SeqList *L);
+void DestroySeqList(SeqList *L);
 
 /* Insert */
 /*!

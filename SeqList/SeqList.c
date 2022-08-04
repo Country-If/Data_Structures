@@ -4,10 +4,28 @@
 
 #include "SeqList.h"
 
-Status InitSeqList(SeqList *L) {}
+Status InitSeqList(SeqList *L) {
+    (*L).data = (ElemType *) malloc(sizeof(ElemType) * DeltaSize);
+    if ((*L).data == NULL) {
+        return false;
+    }
+    for (int i = 0; i < DeltaSize; i++) {
+        if (sizeof(ElemType) == sizeof(int)) {
+            (*L).data[i] = 0;
+        }
+        else if (sizeof(ElemType) == sizeof(char)) {
+            (*L).data[i] = '\0';
+        }
+    }
+    (*L).length = 0;
+    (*L).MaxSize = DeltaSize;
+    return true;
+}
 
 
-Status DestroySeqList(SeqList *L) {}
+void DestroySeqList(SeqList *L) {
+    free((*L).data);
+}
 
 
 Status SeqList_Head_Insert(SeqList *L, ElemType e) {}
@@ -34,7 +52,12 @@ Status SeqList_Update_By_Value(SeqList *L, ElemType old, ElemType new) {}
 Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e) {}
 
 
-Status SeqList_Traverse(SeqList L, void(*visit)(ElemType e)) {}
+Status SeqList_Traverse(SeqList L, void(*visit)(ElemType e)) {
+    for (int i = 0; i < L.length; i++) {
+        visit(L.data[i]);
+    }
+    printf("NULL\n");
+}
 
 
 void seqlist_menu(void) {
@@ -66,13 +89,9 @@ void seqlist_menu(void) {
                     printf("The list is already NULL!\n");
                 }
                 else {
-                    if (DestroySeqList(&L) == true) {
-                        init_flag = 0;
-                        printf("Succeeded!\n");
-                    }
-                    else {
-                        printf("Failed!\n");
-                    }
+                    DestroySeqList(&L);
+                    init_flag = 0;
+                    printf("Succeeded!\n");
                 }
                 break;
             case 3:     // Insert a node from head
@@ -213,7 +232,7 @@ void seqlist_menu(void) {
         }
     } while (choice != 0);
     // release memory
-    if (init_flag == 0) {
+    if (init_flag != 0) {
         DestroySeqList(&L);
     }
 }
