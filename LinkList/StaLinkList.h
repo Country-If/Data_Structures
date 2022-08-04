@@ -85,7 +85,7 @@ int StaList_Retrieve_Position(StaLinkList *L);
 /*!
  * Retrieve a node of the static linked list (with a head node) by value
  * @param L : pointer to the static linked list array
- * @param e : the data of the node to be retrieve
+ * @param e : the data of the node to be retrieved
  * @return position of the result node if successfully retrieved else -1
  */
 int StaList_Retrieve_By_Value(StaLinkList *L, ElemType e);

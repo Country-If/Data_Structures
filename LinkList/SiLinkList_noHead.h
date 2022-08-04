@@ -76,7 +76,7 @@ Status SiList_noHead_Delete_By_Order(SiList_noHead *L, int i, ElemType *e);
 /*!
  * Retrieve a node of the single linked list (without a head node) by value
  * @param L : pointer to the single linked list
- * @param e : the data of the node to be retrieve
+ * @param e : the data of the node to be retrieved
  * @return pointer to the result node if successfully retrieved else NULL
  */
 SiLNode_noHead *SiList_noHead_Retrieve_By_Value(SiList_noHead L, ElemType e);

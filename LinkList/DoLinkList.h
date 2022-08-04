@@ -83,7 +83,7 @@ Status DoList_Delete_By_Order(DoList *L, int i, ElemType *e);
 /*!
  * Retrieve a node of the double linked list by value
  * @param L : pointer to the double linked list
- * @param e : the data of the node to be retrieve
+ * @param e : the data of the node to be retrieved
  * @return pointer to the result node if successfully retrieved else NULL
  */
 DoLNode *DoList_Retrieve_By_Value(DoList L, ElemType e);
