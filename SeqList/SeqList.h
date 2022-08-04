@@ -85,7 +85,7 @@ Status SeqList_Delete_By_Order(SeqList *L, int i, ElemType *e);
  * Retrieve a data of the sequential list by value
  * @param L : pointer to the sequential list
  * @param e : the data to be retrieved
- * @return position of the result if successfully retrieved else -1
+ * @return position (subscript) of the result if successfully retrieved else -1
  */
 int SeqList_Retrieve_By_Value(SeqList *L, ElemType e);
 

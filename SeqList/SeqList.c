@@ -89,7 +89,18 @@ Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
 }
 
 
-Status SeqList_Delete_By_Value(SeqList *L, ElemType e) {}
+Status SeqList_Delete_By_Value(SeqList *L, ElemType e) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    int pos = SeqList_Retrieve_By_Value(L, e);
+    if (pos == -1) {
+        return false;
+    }
+
+    return SeqList_Delete_By_Order(L, pos + 1, &e);
+}
 
 
 Status SeqList_Delete_By_Order(SeqList *L, int i, ElemType *e) {
@@ -248,7 +259,7 @@ void seqlist_menu(void) {
                 }
                 break;
             case 6:     // Delete a node by order
-                if (init_flag == 0) {
+                if (init_flag == 0 || L.length == 0) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -267,7 +278,7 @@ void seqlist_menu(void) {
                 }
                 break;
             case 7:     // Delete a node by value
-                if (init_flag == 0) {
+                if (init_flag == 0 || L.length == 0) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -282,7 +293,7 @@ void seqlist_menu(void) {
                 }
                 break;
             case 8:     // Update a node by order
-                if (init_flag == 0) {
+                if (init_flag == 0 || L.length == 0) {
                     printf("The list is NULL!\n");
                 }
                 else {
@@ -302,7 +313,7 @@ void seqlist_menu(void) {
                 }
                 break;
             case 9:     // Update a node by value
-                if (init_flag == 0) {
+                if (init_flag == 0 || L.length == 0) {
                     printf("The list is NULL!\n");
                 }
                 else {
