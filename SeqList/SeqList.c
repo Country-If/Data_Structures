@@ -124,7 +124,18 @@ Status SeqList_Update_By_Value(SeqList *L, ElemType old, ElemType new) {
 }
 
 
-Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e) {}
+Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    if (i < 1 || i > (*L).length) {
+        return input_error;
+    }
+
+    (*L).data[i - 1] = e;
+    return true;
+}
 
 
 Status SeqList_Traverse(SeqList L, void(*visit)(ElemType e)) {
