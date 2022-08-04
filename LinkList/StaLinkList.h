@@ -35,7 +35,7 @@ Status DestroyStaList(StaLinkList **L);
  * Insert a node from head of the static linked list (with a head node)
  * @param L : pointer to the static linked list array
  * @param e : element to be inserted
- * @return status (true, false)
+ * @return status (true, false, list_full)
  */
 Status StaList_Head_Insert(StaLinkList *L, ElemType e);
 
@@ -43,7 +43,7 @@ Status StaList_Head_Insert(StaLinkList *L, ElemType e);
  * Insert a node from tail of the static linked list (with a head node)
  * @param L : pointer to the static linked list array
  * @param e : element to be insert
- * @return status (true, false)
+ * @return status (true, false, list_full)
  */
 Status StaList_Tail_Insert(StaLinkList *L, ElemType e);
 
@@ -52,7 +52,7 @@ Status StaList_Tail_Insert(StaLinkList *L, ElemType e);
  * @param L : pointer to the static linked list array
  * @param i : the order of a specific node, legitimate range: [1, n + 1]
  * @param e : element to be insert
- * @return status (true, false, input_error)
+ * @return status (true, false, input_error, list_full)
  */
 Status StaList_Insert_By_Order(StaLinkList *L, int i, ElemType e);
 
