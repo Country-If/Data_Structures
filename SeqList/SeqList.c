@@ -92,7 +92,22 @@ Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
 Status SeqList_Delete_By_Value(SeqList *L, ElemType e) {}
 
 
-Status SeqList_Delete_By_Order(SeqList *L, int i, ElemType *e) {}
+Status SeqList_Delete_By_Order(SeqList *L, int i, ElemType *e) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    if (i < 1 || i > (*L).length) {
+        return input_error;
+    }
+
+    *e = (*L).data[i - 1];
+    for (int j = i; j < (*L).length; j++) {
+        (*L).data[j - 1] = (*L).data[j];
+    }
+    (*L).length--;
+    return true;
+}
 
 
 int SeqList_Retrieve_By_Value(SeqList *L, ElemType e) {
