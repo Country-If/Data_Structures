@@ -41,7 +41,9 @@ void DestroySeqList(SeqList *L) {
 }
 
 
-Status SeqList_Head_Insert(SeqList *L, ElemType e) {}
+Status SeqList_Head_Insert(SeqList *L, ElemType e) {
+    return SeqList_Insert_By_Order(L, 1, e);
+}
 
 
 Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
@@ -59,7 +61,32 @@ Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
 }
 
 
-Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {}
+Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    if (i < 1 || i > (*L).length + 1) {
+        return input_error;
+    }
+
+    if (i == (*L).length + 1) {
+        return SeqList_Tail_Insert(L, e);
+    }
+    else {
+        if ((*L).length == (*L).MaxSize) {
+            if (SeqList_Increase_Capacity(L) == false) {
+                return false;
+            }
+        }
+
+        for (int j = (*L).length; j > i - 1; j--) {     // move backward
+            (*L).data[j] = (*L).data[j - 1];
+        }
+        (*L).data[i - 1] = e;
+        (*L).length++;
+    }
+}
 
 
 Status SeqList_Delete_By_Value(SeqList *L, ElemType e) {}
