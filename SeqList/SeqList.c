@@ -5,20 +5,33 @@
 #include "SeqList.h"
 
 Status InitSeqList(SeqList *L) {
-    (*L).data = (ElemType *) malloc(sizeof(ElemType) * DeltaSize);
+    (*L).data = (ElemType *) calloc(DeltaSize, sizeof(ElemType));
     if ((*L).data == NULL) {
         return false;
     }
-    for (int i = 0; i < DeltaSize; i++) {
-        if (sizeof(ElemType) == sizeof(int)) {
-            (*L).data[i] = 0;
-        }
-        else if (sizeof(ElemType) == sizeof(char)) {
-            (*L).data[i] = '\0';
-        }
-    }
+
     (*L).length = 0;
     (*L).MaxSize = DeltaSize;
+    return true;
+}
+
+
+Status SeqList_Increase_Capacity(SeqList *L) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    ElemType *p = (*L).data;
+    (*L).data = (ElemType *) calloc((*L).MaxSize + DeltaSize, sizeof(ElemType));
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < (*L).length; i++) {     // backup old data
+        (*L).data[i] = p[i];
+    }
+    (*L).MaxSize += DeltaSize;
+    free(p);
     return true;
 }
 
@@ -31,7 +44,19 @@ void DestroySeqList(SeqList *L) {
 Status SeqList_Head_Insert(SeqList *L, ElemType e) {}
 
 
-Status SeqList_Tail_Insert(SeqList *L, ElemType e) {}
+Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    if ((*L).length == (*L).MaxSize) {
+        if (SeqList_Increase_Capacity(L) == false) {
+            return false;
+        }
+    }
+    (*L).data[(*L).length++] = e;
+    return true;
+}
 
 
 Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {}
@@ -106,9 +131,6 @@ void seqlist_menu(void) {
                         printf("Succeeded!\n");
                     }
                     else {
-                        if (result == list_full) {
-                            printf("List is already full!\n");
-                        }
                         printf("Failed!\n");
                     }
                 }
@@ -125,9 +147,6 @@ void seqlist_menu(void) {
                         printf("Succeeded!\n");
                     }
                     else {
-                        if (result == list_full) {
-                            printf("List is already full!\n");
-                        }
                         printf("Failed!\n");
                     }
                 }
