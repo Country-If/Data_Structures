@@ -1,5 +1,6 @@
 #include "main.h"
 
+#include "SeqList/SeqList.h"            // SeqList
 #include "LinkList/LinkList.h"      // Linked List
 
 int main() {
@@ -12,7 +13,7 @@ int main() {
             case 0:     // exit
                 break;
             case 1:     // array
-
+                seqlist_menu();
                 break;
             case 2:     // linked list
                 linklist_menu();
@@ -103,19 +104,19 @@ void main_menu(void) {
     printf("\t**********************************\n");
     printf("\t*         Data Structure         *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  1  |     Array                *\n");
+    printf("\t*  1  |   Sequential List        *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  2  |     Linked List          *\n");
+    printf("\t*  2  |   Linked List            *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  3  |     Stack                *\n");
+    printf("\t*  3  |   Stack                  *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  4  |     Queue                *\n");
+    printf("\t*  4  |   Queue                  *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  5  |     Tree                 *\n");
+    printf("\t*  5  |   Tree                   *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  6  |     Map                  *\n");
+    printf("\t*  6  |   Map                    *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  0  |     Exit                 *\n");
+    printf("\t*  0  |   Exit                   *\n");
     printf("\t**********************************\n");
     printf("\nPlease enter the corresponding number(0-6): ");
 }
