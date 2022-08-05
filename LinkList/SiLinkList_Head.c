@@ -63,7 +63,7 @@ Status SiList_Head_Tail_Insert(SiList_Head L, ElemType e) {
     }
 
     p->data = e;
-    p->next = t->next;
+    p->next = NULL;
     t->next = p;
     return true;
 }

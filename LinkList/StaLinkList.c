@@ -77,7 +77,7 @@ Status StaList_Tail_Insert(StaLinkList *L, ElemType e) {
     }
 
     (*L)[pos].data = e;
-    (*L)[pos].next = (*L)[t].next;
+    (*L)[pos].next = -1;
     (*L)[t].next = pos;
     return true;
 }
