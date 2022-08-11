@@ -237,6 +237,25 @@ Status CirDoList_Update_By_Order(CirDoList L, int i, ElemType e) {
 }
 
 
+Status CirDoList_Reverse(CirDoList *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    CirDoLNode *p = (*L)->next, *q, *r = (*L)->prior, *s = *L;
+    (*L)->prior = p;
+    (*L)->next = r;
+    while (p != s) {
+        q = p->next;
+        p->prior = q;
+        p->next = *L;
+        *L = p;
+        p = q;
+    }
+    return true;
+}
+
+
 void CirDoList_Traverse(CirDoList L, void(*visit)(ElemType e)) {
     CirDoLNode *p = L;
     if (L != NULL) {
@@ -384,11 +403,24 @@ void cirdolinklist_menu(void) {
                     }
                 }
                 break;
+            case 10:    // reverse the list
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    if (CirDoList_Reverse(&L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 1 && choice <= 9) {
+        if (choice >= 1 && choice <= 10) {
             printf("Current list: ");
             CirDoList_Traverse(L, visit);
         }
@@ -423,7 +455,9 @@ void cirdolinklist_menu_show_details(void) {
     printf("\t*------------------------------------------------*\n");
     printf("\t*  9  |   Update a node by value                 *\n");
     printf("\t*------------------------------------------------*\n");
+    printf("\t*  10 |   Reverse the list                       *\n");
+    printf("\t*------------------------------------------------*\n");
     printf("\t*  0  |   Back                                   *\n");
     printf("\t**************************************************\n");
-    printf("\nPlease enter the corresponding number(0-9): ");
+    printf("\nPlease enter the corresponding number(0-10): ");
 }
