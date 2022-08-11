@@ -220,6 +220,23 @@ Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e) {
 }
 
 
+Status SiList_noHead_Reverse(SiList_noHead *L) {
+    if (*L == NULL) {
+        return false;
+    }
+
+    SiLNode_noHead *p = (*L)->next, *q;
+    (*L)->next = NULL;
+    while (p != NULL) {
+        q = p->next;
+        p->next = *L;
+        *L = p;
+        p = q;
+    }
+    return true;
+}
+
+
 void SiList_noHead_Traverse(SiList_noHead L, void(*visit)(ElemType e)) {
     SiList_noHead p = L;
     while (p != NULL) {
@@ -365,11 +382,24 @@ void silinklist_noHead_menu(void) {
                     }
                 }
                 break;
+            case 10:    // reverse the list
+                if (L == NULL) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    if (SiList_noHead_Reverse(&L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 1 && choice <= 9) {
+        if (choice >= 1 && choice <= 10) {
             printf("Current list: ");
             SiList_noHead_Traverse(L, visit);
         }
@@ -404,7 +434,9 @@ void silinklist_noHead_menu_show_details(void) {
     printf("\t*------------------------------------------------*\n");
     printf("\t*  9  |   Update a node by value                 *\n");
     printf("\t*------------------------------------------------*\n");
+    printf("\t*  10 |   Reverse the list                       *\n");
+    printf("\t*------------------------------------------------*\n");
     printf("\t*  0  |   Back                                   *\n");
     printf("\t**************************************************\n");
-    printf("\nPlease enter the corresponding number(0-9): ");
+    printf("\nPlease enter the corresponding number(0-10): ");
 }

@@ -100,6 +100,14 @@ Status SiList_noHead_Update_By_Value(SiList_noHead L, ElemType old, ElemType new
  */
 Status SiList_noHead_Update_By_Order(SiList_noHead L, int i, ElemType e);
 
+/* Reverse */
+/*!
+ * Reverse the single linked list (without a head node)
+ * @param L : pointer to the single linked list pointer
+ * @return status (true, false)
+ */
+Status SiList_noHead_Reverse(SiList_noHead *L);
+
 /* Traverse */
 /*!
  * Traverse the single linked list (without a head node)
