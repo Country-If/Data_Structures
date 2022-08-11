@@ -101,17 +101,25 @@ Status CirSiList_Update_By_Value(CirSiList L, ElemType old, ElemType new);
 
 /*!
  * Update a node of the circular single linked list (with a head node) by order
- * @param L : pointer to the single linked list
+ * @param L : pointer to the circular single linked list
  * @param i : the order of a specific node, legitimate range: [1, n]
  * @param e : the data of the node to be updated
  * @return status (true, false, input_error)
  */
 Status CirSiList_Update_By_Order(CirSiList L, int i, ElemType e);
 
+/* Reverse */
+/*!
+ * Reverse the circular single linked list (with a head node)
+ * @param L : pointer to the circular single linked list
+ * @return status (true, false)
+ */
+Status CirSiList_Reverse(CirSiList L);
+
 /* Traverse */
 /*!
  * Traverse the circular single linked list (with a head node)
- * @param L : pointer to the single linked list
+ * @param L : pointer to the circular single linked list
  * @param visit : function pointer to the function that prints the data of a node
  * @return status (true, false)
  */
