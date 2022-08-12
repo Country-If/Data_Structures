@@ -108,6 +108,14 @@ Status SeqList_Update_By_Value(SeqList *L, ElemType old, ElemType new);
  */
 Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e);
 
+/* Reverse */
+/*!
+ * Reverse the sequential list
+ * @param L : pointer to the sequential list
+ * @return status (true, false)
+ */
+Status SeqList_Reverse(SeqList *L);
+
 /* Traverse */
 /*!
  * Traverse the sequential list

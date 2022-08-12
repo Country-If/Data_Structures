@@ -164,6 +164,21 @@ Status SeqList_Update_By_Order(SeqList *L, int i, ElemType e) {
 }
 
 
+Status SeqList_Reverse(SeqList *L) {
+    if ((*L).data == NULL) {
+        return false;
+    }
+
+    ElemType t;
+    for (int i = 0; i < (*L).length / 2; i++) {
+        t = (*L).data[i];
+        (*L).data[i] = (*L).data[(*L).length - 1 - i];
+        (*L).data[(*L).length - 1 - i] = t;
+    }
+    return true;
+}
+
+
 Status SeqList_Traverse(SeqList L, void(*visit)(ElemType e)) {
     for (int i = 0; i < L.length; i++) {
         visit(L.data[i]);
@@ -328,11 +343,24 @@ void seqlist_menu(void) {
                     }
                 }
                 break;
+            case 10:    // reverse the list
+                if (init_flag == 0 || L.length == 0) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    if (SeqList_Reverse(&L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 9 && init_flag != 0) {
+        if (choice >= 3 && choice <= 10 && init_flag != 0) {
             printf("Current list: ");
             SeqList_Traverse(L, visit);
         }
@@ -367,7 +395,9 @@ void seqlist_menu_show_details(void) {
     printf("\t*------------------------------------------*\n");
     printf("\t*  9  |   Update a data by value           *\n");
     printf("\t*------------------------------------------*\n");
+    printf("\t*  10 |   Reverse the list                 *\n");
+    printf("\t*------------------------------------------*\n");
     printf("\t*  0  |   Back                             *\n");
     printf("\t********************************************\n");
-    printf("\nPlease enter the corresponding number(0-9): ");
+    printf("\nPlease enter the corresponding number(0-10): ");
 }
