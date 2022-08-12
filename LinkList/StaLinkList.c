@@ -244,6 +244,23 @@ Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e) {
 }
 
 
+Status StaList_Reverse(StaLinkList *L) {
+    if (*L == NULL || (*L)[0].next == -1) {
+        return false;
+    }
+
+    int p = (*L)[0].next, q;
+    (*L)[0].next = -1;
+    while (p != -1) {
+        q = (*L)[p].next;
+        (*L)[p].next = (*L)[0].next;
+        (*L)[0].next = p;
+        p = q;
+    }
+    return true;
+}
+
+
 Status StaList_Traverse(StaLinkList *L, void(*visit)(ElemType e)) {
     if (*L == NULL) {
         return false;
@@ -426,11 +443,24 @@ void stalinklist_menu(void) {
                     }
                 }
                 break;
+            case 10:    // reverse the list
+                if (L == NULL || (*L)[0].next == -1) {
+                    printf("The list is NULL!\n");
+                }
+                else {
+                    if (StaList_Reverse(L) == true) {
+                        printf("Succeeded!\n");
+                    }
+                    else {
+                        printf("Failed!\n");
+                    }
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 9 && L != NULL) {
+        if (choice >= 3 && choice <= 10 && L != NULL) {
             printf("Current list: ");
             StaList_Traverse(L, visit);
         }
@@ -465,7 +495,9 @@ void stalinklist_menu_show_details(void) {
     printf("\t*------------------------------------------------*\n");
     printf("\t*  9  |   Update a node by value                 *\n");
     printf("\t*------------------------------------------------*\n");
+    printf("\t*  10 |   Reverse the list                       *\n");
+    printf("\t*------------------------------------------------*\n");
     printf("\t*  0  |   Back                                   *\n");
     printf("\t**************************************************\n");
-    printf("\nPlease enter the corresponding number(0-9): ");
+    printf("\nPlease enter the corresponding number(0-10): ");
 }

@@ -117,6 +117,14 @@ Status StaList_Update_By_Value(StaLinkList *L, ElemType old, ElemType new);
  */
 Status StaList_Update_By_Order(StaLinkList *L, int i, ElemType e);
 
+/* Reverse */
+/*!
+ * Reverse the static linked list (with a head node)
+ * @param L : pointer to the static linked list array
+ * @return status (true, false)
+ */
+Status StaList_Reverse(StaLinkList *L);
+
 /* Traverse */
 /*!
  * Traverse the static linked list (with a head node)
