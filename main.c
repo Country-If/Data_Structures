@@ -1,7 +1,8 @@
 #include "main.h"
 
 #include "SeqList/SeqList.h"            // SeqList
-#include "LinkList/LinkList.h"      // Linked List
+#include "LinkList/LinkList.h"          // Linked List
+#include "Stack/Stack.h"                // Stack
 
 int main() {
     int choice;
@@ -19,7 +20,7 @@ int main() {
                 linklist_menu();
                 break;
             case 3:     // stack
-
+                stack_menu();
                 break;
             case 4:     // queue
 
