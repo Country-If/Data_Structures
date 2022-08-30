@@ -105,6 +105,7 @@ Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
         }
         (*L).data[i - 1] = e;
         (*L).length++;
+        return true;
     }
 }
 
