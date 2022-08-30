@@ -41,7 +41,29 @@ void DestroySeqStack(SeqStack *S) {
 }
 
 
-Status SeqStack_Push(SeqStack *S, ElemType e) {}
+Status SeqStack_Push(SeqStack *S, ElemType e) {
+    char choice;
+
+    if ((*S).data == NULL) {
+        return false;
+    }
+
+    if ((*S).top + 1 == (*S).MaxSize) {
+        printf("The stack if full, do you want to increase the capacity?(y/n) ");
+        choice = get_choice();
+        if (choice == 'N' || choice == 'n') {
+            return false;
+        }
+        else if (choice == 'Y' || choice == 'y') {
+            if (SeqStack_Increase_Capacity(S) == false) {
+                printf("Failed to increase capacity!\n");
+                return false;
+            }
+        }
+    }
+    (*S).data[++(*S).top] = e;
+    return true;
+}
 
 
 Status SeqStack_Pop(SeqStack *S, ElemType *e) {}
@@ -53,7 +75,7 @@ Status SeqStack_Empty(SeqStack S) {
 
 
 int SeqStack_Len(SeqStack S) {
-    return S.top;
+    return S.top + 1;
 }
 
 
