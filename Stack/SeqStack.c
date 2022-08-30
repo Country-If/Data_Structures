@@ -16,7 +16,24 @@ Status InitSeqStack(SeqStack *S) {
 }
 
 
-Status SeqStack_Increase_Capacity(SeqStack *S) {}
+Status SeqStack_Increase_Capacity(SeqStack *S) {
+    if ((*S).data == NULL) {
+        return false;
+    }
+
+    ElemType *p = (*S).data;
+    (*S).data = (ElemType *) calloc((*S).MaxSize + DeltaSize, sizeof(ElemType));
+    if ((*S).data == NULL) {
+        return false;
+    }
+
+    for (int i = 0; i < (*S).top; i++) {
+        (*S).data[i] = p[i];
+    }
+    (*S).MaxSize += DeltaSize;
+    free(p);
+    return true;
+}
 
 
 void DestroySeqStack(SeqStack *S) {
@@ -136,7 +153,7 @@ void seqstack_menu_show_details(void) {
     printf("\t*  3  |   Push stack                       *\n");
     printf("\t*------------------------------------------*\n");
     printf("\t*  4  |   Pop stack                        *\n");
-    printf("\t*-------------------------- ---------------*\n");
+    printf("\t*------------------------------------------*\n");
     printf("\t*  0  |   Back                             *\n");
     printf("\t********************************************\n");
     printf("\nPlease enter the corresponding number(0-4): ");
