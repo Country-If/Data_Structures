@@ -16,7 +16,7 @@ void stack_menu(void) {
             case 0:     // exit
                 break;
             case 1:     // sequential stack
-//                seqstack_menu();
+                seqstack_menu();
                 break;
             case 2:     // linked stack (with a head node)
 //                linkstack_menu();
