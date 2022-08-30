@@ -23,7 +23,7 @@ typedef struct {
 Status InitSeqList(SeqList *L);
 
 /*!
- * Increase capacity of sequential list when list is full
+ * Increase capacity of the sequential list when the list is full
  * @param L : pointer to the sequential list
  * @return status (true, false)
  */
