@@ -66,7 +66,14 @@ Status SeqStack_Push(SeqStack *S, ElemType e) {
 }
 
 
-Status SeqStack_Pop(SeqStack *S, ElemType *e) {}
+Status SeqStack_Pop(SeqStack *S, ElemType *e) {
+    if ((*S).data == NULL || SeqStack_Empty((*S))) {
+        return false;
+    }
+
+    *e = (*S).data[(*S).top--];
+    return true;
+}
 
 
 Status SeqStack_Empty(SeqStack S) {
@@ -136,11 +143,9 @@ void seqstack_menu(void) {
                     printf("The stack is NULL!\n");
                 }
                 else {
-                    get_input_element(&e);
-                    system("cls");
                     result = SeqStack_Pop(&S, &e);
                     if (result == true) {
-                        printf("Succeeded!\n");
+                        printf("Successfully deleted data: %d\n", e);
                     }
                     else {
                         printf("Failed!\n");
