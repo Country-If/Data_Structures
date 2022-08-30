@@ -66,10 +66,10 @@ int SeqStack_Len(SeqStack S);
 
 /*!
  * Traverse the sequential stack
- * @param S : pointer to the sequential stack
+ * @param S : the sequential stack
  * @param visit : function pointer to the function that prints the data of a node
  */
-void SeqStack_Traverse(SeqStack *S, void(*visit)(ElemType e));
+void SeqStack_Traverse(SeqStack S, void(*visit)(ElemType e));
 
 /*!
  * The sequential stack menu

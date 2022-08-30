@@ -27,7 +27,7 @@ Status SeqStack_Increase_Capacity(SeqStack *S) {
         return false;
     }
 
-    for (int i = 0; i < (*S).top; i++) {
+    for (int i = 0; i <= (*S).top; i++) {
         (*S).data[i] = p[i];
     }
     (*S).MaxSize += DeltaSize;
@@ -51,6 +51,7 @@ Status SeqStack_Push(SeqStack *S, ElemType e) {
     if ((*S).top + 1 == (*S).MaxSize) {
         printf("The stack if full, do you want to increase the capacity?(y/n) ");
         choice = get_choice();
+        system("cls");
         if (choice == 'N' || choice == 'n') {
             return false;
         }
@@ -86,7 +87,12 @@ int SeqStack_Len(SeqStack S) {
 }
 
 
-void SeqStack_Traverse(SeqStack *S, void(*visit)(ElemType e)) {}
+void SeqStack_Traverse(SeqStack S, void(*visit)(ElemType e)) {
+    for (int i = 0; i <= S.top; i++) {
+        visit(S.data[i]);
+    }
+    printf("NULL\n");
+}
 
 
 void seqstack_menu(void) {
@@ -158,7 +164,7 @@ void seqstack_menu(void) {
         }
         if (choice >= 3 && choice <= 4 && init_flag != 0) {
             printf("Current stack: ");
-            SeqStack_Traverse(&S, visit);
+            SeqStack_Traverse(S, visit);
         }
     } while (choice != 0);
     // release memory
