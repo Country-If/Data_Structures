@@ -4,13 +4,24 @@
 
 #include "SeqStack.h"
 
-Status InitSeqStack(SeqStack *S) {}
+Status InitSeqStack(SeqStack *S) {
+    (*S).data = (ElemType *) calloc(DeltaSize, sizeof(ElemType));
+    if ((*S).data == NULL) {
+        return false;
+    }
+
+    (*S).top = -1;
+    (*S).MaxSize = DeltaSize;
+    return true;
+}
 
 
 Status SeqStack_Increase_Capacity(SeqStack *S) {}
 
 
-void DestroySeqStack(SeqStack *L) {}
+void DestroySeqStack(SeqStack *S) {
+    free((*S).data);
+}
 
 
 Status SeqStack_Push(SeqStack *S, ElemType e) {}
@@ -19,10 +30,14 @@ Status SeqStack_Push(SeqStack *S, ElemType e) {}
 Status SeqStack_Pop(SeqStack *S, ElemType *e) {}
 
 
-Status SeqStack_Empty(SeqStack S) {}
+Status SeqStack_Empty(SeqStack S) {
+    return S.top == -1;
+}
 
 
-int SeqStack_Len(SeqStack S) {}
+int SeqStack_Len(SeqStack S) {
+    return S.top;
+}
 
 
 void SeqStack_Traverse(SeqStack *S, void(*visit)(ElemType e)) {}
@@ -33,7 +48,6 @@ void seqstack_menu(void) {
     SeqStack S;
     int init_flag = 0;
     ElemType e;
-    int i;
     Status result;
     do {
         seqstack_menu_show_details();
@@ -60,7 +74,6 @@ void seqstack_menu(void) {
                     DestroySeqStack(&S);
                     init_flag = 0;
                     printf("Succeeded!\n");
-
                 }
                 break;
             case 3:     // Push stack

@@ -7,11 +7,11 @@
 #ifndef DATA_STRUCTURES_SEQSTACK_H
 #define DATA_STRUCTURES_SEQSTACK_H
 
-#define MaxSize 10
+#define DeltaSize 5
 
 typedef struct {
-    ElemType data[MaxSize];
-    int top;
+    ElemType *data;
+    int top, MaxSize;
 } SeqStack;
 
 /*!
@@ -30,9 +30,9 @@ Status SeqStack_Increase_Capacity(SeqStack *S);
 
 /*!
  * Destroy the sequential stack
- * @param L : pointer to the sequential stack
+ * @param S : pointer to the sequential stack
  */
-void DestroySeqStack(SeqStack *L);
+void DestroySeqStack(SeqStack *S);
 
 /*!
  * Push an element into the sequential stack
