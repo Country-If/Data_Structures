@@ -100,6 +100,23 @@ int judge_int(void) {
 }
 
 
+char get_choice(void) {
+    int len;
+    char word[10] = {0};
+    while (1) {
+        scanf("%s", word);
+        len = strlen(word);
+        if ((len == 1) && (word[0] == 'Y' || word[0] == 'y' || word[0] == 'N' || word[0] == 'n')) {
+            break;
+        }
+        else {
+            printf("Please enter Y/y or N/n: ");
+        }
+    }
+    return word[0];
+}
+
+
 void main_menu(void) {
     printf("\n");
     printf("\t**********************************\n");

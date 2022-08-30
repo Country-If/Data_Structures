@@ -47,13 +47,23 @@ Status SeqList_Head_Insert(SeqList *L, ElemType e) {
 
 
 Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
+    char choice;
+
     if ((*L).data == NULL) {
         return false;
     }
 
     if ((*L).length == (*L).MaxSize) {
-        if (SeqList_Increase_Capacity(L) == false) {
+        printf("The list if full, do you want to increase the capacity?(y/n) ");
+        choice = get_choice();
+        if (choice == 'N' || choice == 'n') {
             return false;
+        }
+        else if (choice == 'Y' || choice == 'y') {
+            if (SeqList_Increase_Capacity(L) == false) {
+                printf("Failed to increase capacity!\n");
+                return false;
+            }
         }
     }
     (*L).data[(*L).length++] = e;
@@ -62,6 +72,8 @@ Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
 
 
 Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
+    char choice;
+
     if ((*L).data == NULL) {
         return false;
     }
@@ -75,8 +87,16 @@ Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
     }
     else {
         if ((*L).length == (*L).MaxSize) {
-            if (SeqList_Increase_Capacity(L) == false) {
+            printf("The list if full, do you want to increase the capacity?(y/n) ");
+            choice = get_choice();
+            if (choice == 'N' || choice == 'n') {
                 return false;
+            }
+            else if (choice == 'Y' || choice == 'y') {
+                if (SeqList_Increase_Capacity(L) == false) {
+                    printf("Failed to increase capacity!\n");
+                    return false;
+                }
             }
         }
 

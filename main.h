@@ -47,6 +47,12 @@ void get_order_position(int *i);
 int judge_int(void);
 
 /*!
+ * get input choice (Y/y/N/n)
+ * @return char (Y/y/N/n)
+ */
+char get_choice(void);
+
+/*!
  * The main menu
  */
 void main_menu(void);
