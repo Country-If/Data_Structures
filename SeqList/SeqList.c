@@ -56,6 +56,7 @@ Status SeqList_Tail_Insert(SeqList *L, ElemType e) {
     if ((*L).length == (*L).MaxSize) {
         printf("The list if full, do you want to increase the capacity?(y/n) ");
         choice = get_choice();
+        system("cls");
         if (choice == 'N' || choice == 'n') {
             return false;
         }
@@ -89,6 +90,7 @@ Status SeqList_Insert_By_Order(SeqList *L, int i, ElemType e) {
         if ((*L).length == (*L).MaxSize) {
             printf("The list if full, do you want to increase the capacity?(y/n) ");
             choice = get_choice();
+            system("cls");
             if (choice == 'N' || choice == 'n') {
                 return false;
             }
