@@ -14,6 +14,7 @@ typedef struct {
     int top, MaxSize;
 } SeqStack;
 
+/* Create */
 /*!
  * Initialize or reset the sequential stack
  * @param S : pointer to the sequential stack
@@ -28,12 +29,14 @@ Status InitSeqStack(SeqStack *S);
  */
 Status SeqStack_Increase_Capacity(SeqStack *S);
 
+/* Destroy */
 /*!
  * Destroy the sequential stack
  * @param S : pointer to the sequential stack
  */
 void DestroySeqStack(SeqStack *S);
 
+/* Push */
 /*!
  * Push an element into the sequential stack
  * @param S : pointer to the sequential stack
@@ -42,6 +45,7 @@ void DestroySeqStack(SeqStack *S);
  */
 Status SeqStack_Push(SeqStack *S, ElemType e);
 
+/* Pop */
 /*!
  * Pop an element out of the sequential stack
  * @param S : pointer to the sequential stack
@@ -49,6 +53,14 @@ Status SeqStack_Push(SeqStack *S, ElemType e);
  * @return status (true, false)
  */
 Status SeqStack_Pop(SeqStack *S, ElemType *e);
+
+/* Retrieve */
+/*!
+ * Get the top data of the sequential stack
+ * @param S : the sequential stack
+ * @param e : pointer to the top data
+ */
+void SeqStack_Get_Top(SeqStack S, ElemType *e);
 
 /*!
  * Judge if the sequential stack is empty
@@ -64,6 +76,7 @@ Status SeqStack_Empty(SeqStack S);
  */
 int SeqStack_Len(SeqStack S);
 
+/* Traverse */
 /*!
  * Traverse the sequential stack
  * @param S : the sequential stack

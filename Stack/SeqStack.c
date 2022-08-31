@@ -77,6 +77,11 @@ Status SeqStack_Pop(SeqStack *S, ElemType *e) {
 }
 
 
+void SeqStack_Get_Top(SeqStack S, ElemType *e) {
+    *e = S.data[S.top];
+}
+
+
 Status SeqStack_Empty(SeqStack S) {
     return S.top == -1;
 }
@@ -112,7 +117,7 @@ void seqstack_menu(void) {
                 if (InitSeqStack(&S) == true) {
                     init_flag = 1;
                     printf("Succeeded!\n");
-                    printf("Current stack: NULL\n");
+                    printf("Current stack (from bottom to top): NULL\n");
                 }
                 else {
                     printf("Failed!\n");
@@ -158,12 +163,21 @@ void seqstack_menu(void) {
                     }
                 }
                 break;
+            case 5:     // Get top
+                if (init_flag == 0 || SeqStack_Empty(S) == true) {
+                    printf("The stack is NULL!\n");
+                }
+                else {
+                    SeqStack_Get_Top(S, &e);
+                    printf("Stack Top data: %d\n", e);
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 4 && init_flag != 0) {
-            printf("Current stack: ");
+        if (choice >= 3 && choice <= 5 && init_flag != 0) {
+            printf("Current stack (from bottom to top): ");
             SeqStack_Traverse(S, visit);
         }
     } while (choice != 0);
@@ -187,7 +201,9 @@ void seqstack_menu_show_details(void) {
     printf("\t*------------------------------------------*\n");
     printf("\t*  4  |   Pop stack                        *\n");
     printf("\t*------------------------------------------*\n");
+    printf("\t*  5  |   Get top                          *\n");
+    printf("\t*------------------------------------------*\n");
     printf("\t*  0  |   Back                             *\n");
     printf("\t********************************************\n");
-    printf("\nPlease enter the corresponding number(0-4): ");
+    printf("\nPlease enter the corresponding number(0-5): ");
 }
