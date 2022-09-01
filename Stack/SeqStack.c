@@ -172,11 +172,19 @@ void seqstack_menu(void) {
                     printf("Stack Top data: %d\n", e);
                 }
                 break;
+            case 6:     // Get length
+                if (init_flag == 0) {
+                    printf("The stack is NULL!\n");
+                }
+                else {
+                    printf("Stack length: %d\n", SeqStack_Len(S));
+                }
+                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 5 && init_flag != 0) {
+        if (choice >= 3 && choice <= 6 && init_flag != 0) {
             printf("Current stack (from bottom to top): ");
             SeqStack_Traverse(S, visit);
         }
@@ -203,7 +211,9 @@ void seqstack_menu_show_details(void) {
     printf("\t*------------------------------------------*\n");
     printf("\t*  5  |   Get top                          *\n");
     printf("\t*------------------------------------------*\n");
+    printf("\t*  6  |   Get length                       *\n");
+    printf("\t*------------------------------------------*\n");
     printf("\t*  0  |   Back                             *\n");
     printf("\t********************************************\n");
-    printf("\nPlease enter the corresponding number(0-5): ");
+    printf("\nPlease enter the corresponding number(0-6): ");
 }
