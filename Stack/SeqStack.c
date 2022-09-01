@@ -125,7 +125,7 @@ void seqstack_menu(void) {
                 break;
             case 2:     // Destroy
                 if (init_flag == 0) {
-                    printf("The stack is already NULL!\n");
+                    printf("The stack isn't initialized!\n");
                 }
                 else {
                     DestroySeqStack(&S);
@@ -135,7 +135,7 @@ void seqstack_menu(void) {
                 break;
             case 3:     // Push stack
                 if (init_flag == 0) {
-                    printf("The stack is NULL!\n");
+                    printf("The stack isn't initialized!\n");
                 }
                 else {
                     get_input_element(&e);
@@ -150,7 +150,10 @@ void seqstack_menu(void) {
                 }
                 break;
             case 4:     // Pop stack
-                if (init_flag == 0 || SeqStack_Empty(S) == true) {
+                if (init_flag == 0) {
+                    printf("The stack isn't initialized!\n");
+                }
+                else if (SeqStack_Empty(S) == true) {
                     printf("The stack is NULL!\n");
                 }
                 else {
@@ -164,7 +167,10 @@ void seqstack_menu(void) {
                 }
                 break;
             case 5:     // Get top
-                if (init_flag == 0 || SeqStack_Empty(S) == true) {
+                if (init_flag == 0) {
+                    printf("The stack isn't initialized!\n");
+                }
+                else if (SeqStack_Empty(S) == true) {
                     printf("The stack is NULL!\n");
                 }
                 else {
@@ -174,7 +180,7 @@ void seqstack_menu(void) {
                 break;
             case 6:     // Get length
                 if (init_flag == 0) {
-                    printf("The stack is NULL!\n");
+                    printf("The stack isn't initialized!\n");
                 }
                 else {
                     printf("Stack length: %d\n", SeqStack_Len(S));
