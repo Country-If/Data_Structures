@@ -5,7 +5,7 @@
 #include "LinkStack.h"
 
 void InitLinkStack(LinkStack *S) {
-    *L = NULL;
+    *S = NULL;
 }
 
 
@@ -24,10 +24,37 @@ Status DestroyLinkStack(LinkStack *S) {
 }
 
 
-Status LinkStack_Push(LinkStack *S, ElemType e) {}
+Status LinkStack_Push(LinkStack *S, ElemType e) {
+    LinkStackNode *p = (LinkStackNode *) malloc(sizeof(LinkStackNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    if (*S == NULL) {
+        *S = p;
+        (*S)->data = e;
+        (*S)->next = NULL;
+    }
+    else {
+        p->data = e;
+        p->next = *S;
+        *S = p;
+    }
+    return true;
+}
 
 
-Status LinkStack_Pop(LinkStack *S, ElemType *e) {}
+Status LinkStack_Pop(LinkStack *S, ElemType *e) {
+    if (*S == NULL) {
+        return false;
+    }
+
+    LinkStackNode *p = *S;
+    *e = (*S)->data;
+    *S = (*S)->next;
+    free(p);
+    return true;
+}
 
 
 void LinkStack_Get_Top(LinkStack S, ElemType *e) {
@@ -131,8 +158,8 @@ void linkstack_menu(void) {
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 6) {
-            printf("Current stack (from bottom to top): ");
+        if (choice >= 1 && choice <= 6) {
+            printf("Current stack (from top to bottom): ");
             LinkStack_Traverse(S, visit);
         }
     } while (choice != 0);
