@@ -4,7 +4,7 @@
 
 #include "Stack.h"
 #include "SeqStack.h"       // sequential stack
-#include "LinkStack.h"      // linked stack (with a head node)
+#include "LinkStack.h"      // linked stack (without a head node)
 
 void stack_menu(void) {
     int choice;
@@ -18,8 +18,8 @@ void stack_menu(void) {
             case 1:     // sequential stack
                 seqstack_menu();
                 break;
-            case 2:     // linked stack (with a head node)
-//                linkstack_menu();
+            case 2:     // linked stack (without a head node)
+                linkstack_menu();
                 break;
             default:
                 printf("Wrong input, please re-enter!\n");
