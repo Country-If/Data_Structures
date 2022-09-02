@@ -22,3 +22,6 @@
     - static linked list (with a head node) [header file](LinkList/StaLinkList.h)
       , [C source file](LinkList/StaLinkList.c)
 - sequential list [header file](SeqList/SeqList.h), [C source file](SeqList/SeqList.c)
+- stack
+  - sequential stack [header file](Stack/SeqStack.h), [C source file](Stack/SeqStack.c)
+  - linked stack (without a head node) [header file](Stack/LinkStack.h), [C source file](Stack/LinkStack.c)
