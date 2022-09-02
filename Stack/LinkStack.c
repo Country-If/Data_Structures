@@ -4,10 +4,24 @@
 
 #include "LinkStack.h"
 
-void InitLinkStack(LinkStack *S) {}
+void InitLinkStack(LinkStack *S) {
+    *L = NULL;
+}
 
 
-Status DestroyLinkStack(LinkStack *S) {}
+Status DestroyLinkStack(LinkStack *S) {
+    if (*S == NULL) {
+        return false;
+    }
+
+    LinkStackNode *p;
+    while (*S != NULL) {
+        p = *S;
+        *S = (*S)->next;
+        free(p);
+    }
+    return true;
+}
 
 
 Status LinkStack_Push(LinkStack *S, ElemType e) {}
@@ -16,16 +30,35 @@ Status LinkStack_Push(LinkStack *S, ElemType e) {}
 Status LinkStack_Pop(LinkStack *S, ElemType *e) {}
 
 
-void LinkStack_Get_Top(LinkStack S, ElemType *e) {}
+void LinkStack_Get_Top(LinkStack S, ElemType *e) {
+    *e = S->data;
+}
 
 
-Status LinkStack_Empty(LinkStack S) {}
+Status LinkStack_Empty(LinkStack S) {
+    return S == NULL;
+}
 
 
-int LinkStack_Len(LinkStack S) {}
+int LinkStack_Len(LinkStack S) {
+    int count = 0;
+    LinkStack p = S;
+    while (p != NULL) {
+        count++;
+        p = p->next;
+    }
+    return count;
+}
 
 
-void LinkStack_Traverse(LinkStack S, void(*visit)(ElemType e)) {}
+void LinkStack_Traverse(LinkStack S, void(*visit)(ElemType e)) {
+    LinkStack p = S;
+    while (p != NULL) {
+        visit(p->data);
+        p = p->next;
+    }
+    printf("NULL!\n");
+}
 
 
 void linkstack_menu(void) {

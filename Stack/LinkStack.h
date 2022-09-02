@@ -10,7 +10,7 @@
 typedef struct LinkStackNode {
     ElemType data;
     struct LinkStackNode *next;
-} *LinkStack;
+} LinkStackNode, *LinkStack;
 
 /* Create */
 /*!
