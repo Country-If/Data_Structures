@@ -11,6 +11,7 @@ Status InitSeqQueue(SeqQueue *Q) {
     }
 
     (*Q).front = (*Q).rear = 0;
+    (*Q).MaxSize = DeltaSize;
     return true;
 }
 
@@ -35,10 +36,19 @@ void SeqQueue_Get_Head(SeqQueue Q, ElemType *e) {}
 Status SeqQueue_Empty(SeqQueue Q) {}
 
 
+Status SeqQueue_Full(SeqQueue Q) {}
+
+
 int SeqQueue_Len(SeqQueue Q) {}
 
 
-void SeqQueue_Traverse(SeqQueue Q, void(*visit)(ElemType e)) {}
+void SeqQueue_Traverse(SeqQueue Q, void(*visit)(ElemType e)) {
+    int i = Q.front;
+    while (i != Q.rear) {
+        visit(Q.data[i]);
+        i = (i + 1) % Q.MaxSize;
+    }
+}
 
 
 void seqqueue_menu(void) {

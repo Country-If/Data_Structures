@@ -11,7 +11,7 @@
 
 typedef struct {
     ElemType *data;
-    int front, rear;
+    int front, rear, MaxSize;
 } SeqQueue;
 
 /* Create */
@@ -68,6 +68,13 @@ void SeqQueue_Get_Head(SeqQueue Q, ElemType *e);
  * @return status (true, false)
  */
 Status SeqQueue_Empty(SeqQueue Q);
+
+/*!
+ * Judge if the sequential queue is full
+ * @param Q : the sequential queue
+ * @return status (true, false)
+ */
+Status SeqQueue_Full(SeqQueue Q);
 
 /*!
  * Get the length of the sequential queue
