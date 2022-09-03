@@ -3,8 +3,8 @@
 //
 
 #include "Queue.h"
-#include "SeqQueue.h"
-#include "LinkQueue.h"
+#include "SeqQueue.h"       // sequential queue
+#include "LinkQueue.h"      // linked queue (with a head node)
 
 void queue_menu(void) {
     int choice;
