@@ -16,7 +16,24 @@ Status InitSeqQueue(SeqQueue *Q) {
 }
 
 
-Status SeqQueue_Increase_Capacity(SeqQueue *Q) {}
+Status SeqQueue_Increase_Capacity(SeqQueue *Q) {
+    if ((*Q).data == NULL) {
+        return false;
+    }
+
+    ElemType *p = (*Q).data;
+    (*Q).data = (ElemType *) calloc((*Q).MaxSize + DeltaSize, sizeof(ElemType));
+    if ((*Q).data == NULL) {
+        return false;
+    }
+
+    for (int i = (*Q).front; i != (*Q).rear; i = (i + 1) % (*Q).MaxSize) {
+        (*Q).data[i] = p[i];
+    }
+    (*Q).MaxSize += DeltaSize;
+    free(p);
+    return true;
+}
 
 
 void DestroySeqQueue(SeqQueue *Q) {
@@ -24,7 +41,31 @@ void DestroySeqQueue(SeqQueue *Q) {
 }
 
 
-Status EnSeqQueue(SeqQueue *Q, ElemType e) {}
+Status EnSeqQueue(SeqQueue *Q, ElemType e) {
+    char choice;
+
+    if ((*Q).data == NULL) {
+        return false;
+    }
+
+    if (SeqQueue_Full(*Q) == true) {
+        printf("The queue is full, do you want to increase the capacity?(y/n) ");
+        choice = get_choice();
+        system("cls");
+        if (choice == 'N' || choice == 'n') {
+            return false;
+        }
+        else if (choice == 'Y' || choice == 'y') {
+            if (SeqQueue_Increase_Capacity(Q) == false) {
+                printf("Failed to increase capacity!\n");
+                return false;
+            }
+        }
+    }
+    (*Q).data[(*Q).rear] = e;
+    (*Q).rear = ((*Q).rear + 1) % (*Q).MaxSize;
+    return true;
+}
 
 
 Status DeSeqQueue(SeqQueue *Q, ElemType *e) {}
@@ -33,10 +74,14 @@ Status DeSeqQueue(SeqQueue *Q, ElemType *e) {}
 void SeqQueue_Get_Head(SeqQueue Q, ElemType *e) {}
 
 
-Status SeqQueue_Empty(SeqQueue Q) {}
+Status SeqQueue_Empty(SeqQueue Q) {
+    return Q.rear == Q.front;
+}
 
 
-Status SeqQueue_Full(SeqQueue Q) {}
+Status SeqQueue_Full(SeqQueue Q) {
+    return (Q.rear + 1) % Q.MaxSize == Q.front;
+}
 
 
 int SeqQueue_Len(SeqQueue Q) {}
@@ -48,6 +93,7 @@ void SeqQueue_Traverse(SeqQueue Q, void(*visit)(ElemType e)) {
         visit(Q.data[i]);
         i = (i + 1) % Q.MaxSize;
     }
+    printf("NULL\n");
 }
 
 
