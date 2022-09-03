@@ -3,6 +3,7 @@
 #include "SeqList/SeqList.h"            // SeqList
 #include "LinkList/LinkList.h"          // Linked List
 #include "Stack/Stack.h"                // Stack
+#include "Queue/Queue.h"                // Queue
 
 int main() {
     int choice;
@@ -23,7 +24,7 @@ int main() {
                 stack_menu();
                 break;
             case 4:     // queue
-
+                queue_menu();
                 break;
             case 5:     // tree
 
