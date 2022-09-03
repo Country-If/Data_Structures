@@ -68,10 +68,20 @@ Status EnSeqQueue(SeqQueue *Q, ElemType e) {
 }
 
 
-Status DeSeqQueue(SeqQueue *Q, ElemType *e) {}
+Status DeSeqQueue(SeqQueue *Q, ElemType *e) {
+    if ((*Q).data == NULL || SeqQueue_Empty(*Q)) {
+        return false;
+    }
+
+    *e = (*Q).data[(*Q).front];
+    (*Q).front = ((*Q).front + 1) % (*Q).MaxSize;
+    return true;
+}
 
 
-void SeqQueue_Get_Head(SeqQueue Q, ElemType *e) {}
+void SeqQueue_Get_Head(SeqQueue Q, ElemType *e) {
+    *e = Q.data[Q.front];
+}
 
 
 Status SeqQueue_Empty(SeqQueue Q) {
@@ -84,7 +94,9 @@ Status SeqQueue_Full(SeqQueue Q) {
 }
 
 
-int SeqQueue_Len(SeqQueue Q) {}
+int SeqQueue_Len(SeqQueue Q) {
+    return (Q.rear + Q.MaxSize - Q.front) % Q.MaxSize;
+}
 
 
 void SeqQueue_Traverse(SeqQueue Q, void(*visit)(ElemType e)) {
