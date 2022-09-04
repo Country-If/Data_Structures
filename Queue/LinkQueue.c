@@ -50,13 +50,28 @@ Status EnLinkQueue(LinkQueue *Q, ElemType e) {
 }
 
 
-Status DeLinkQueue(LinkQueue *Q, ElemType *e) {}
+Status DeLinkQueue(LinkQueue *Q, ElemType *e) {
+    if (Q->front == NULL || LinkQueue_Empty(Q)) {
+        return false;
+    }
+
+    *e = Q->front->next->data;
+    LinkQueueNode *p = Q->front->next;
+    Q->front->next = p->next;
+    if (p->next == NULL) {
+        Q->rear = Q->front;
+    }
+    free(p);
+    return true;
+}
 
 
 void LinkQueue_Get_Head(LinkQueue *Q, ElemType *e) {}
 
 
-Status LinkQueue_Empty(LinkQueue *Q) {}
+Status LinkQueue_Empty(LinkQueue *Q) {
+    return Q->front == NULL || Q->front == Q->rear;
+}
 
 
 int LinkQueue_Len(LinkQueue *Q) {}
