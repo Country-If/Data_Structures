@@ -66,7 +66,13 @@ Status DeLinkQueue(LinkQueue *Q, ElemType *e) {
 }
 
 
-void LinkQueue_Get_Head(LinkQueue *Q, ElemType *e) {}
+void LinkQueue_Get_Head(LinkQueue *Q, ElemType *e) {
+    if (Q->front == NULL || LinkQueue_Empty(Q) == true) {
+        return;
+    }
+
+    *e = Q->front->next->data;
+}
 
 
 Status LinkQueue_Empty(LinkQueue *Q) {
@@ -74,7 +80,19 @@ Status LinkQueue_Empty(LinkQueue *Q) {
 }
 
 
-int LinkQueue_Len(LinkQueue *Q) {}
+int LinkQueue_Len(LinkQueue *Q) {
+    if (Q->front == NULL || LinkQueue_Empty(Q) == true) {
+        return 0;
+    }
+
+    int count = 0;
+    LinkQueueNode *p = Q->front->next;
+    while (p != NULL) {
+        count++;
+        p = p->next;
+    }
+    return count;
+}
 
 
 void LinkQueue_Traverse(LinkQueue *Q, void(*visit)(ElemType e)) {
