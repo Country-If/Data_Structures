@@ -32,7 +32,22 @@ Status DestroyLinkQueue(LinkQueue *Q) {
 }
 
 
-Status EnLinkQueue(LinkQueue *Q, ElemType e) {}
+Status EnLinkQueue(LinkQueue *Q, ElemType e) {
+    if (Q->front == NULL) {
+        return false;
+    }
+
+    LinkQueueNode *p = (LinkQueueNode *) malloc(sizeof(LinkQueueNode));
+    if (p == NULL) {
+        return false;
+    }
+
+    p->data = e;
+    p->next = NULL;
+    Q->rear->next = p;
+    Q->rear = p;
+    return true;
+}
 
 
 Status DeLinkQueue(LinkQueue *Q, ElemType *e) {}
@@ -64,6 +79,7 @@ void LinkQueue_Traverse(LinkQueue *Q, void(*visit)(ElemType e)) {
 void linkqueue_menu(void) {
     int choice;
     LinkQueue Q;
+    Q.front = Q.rear = NULL;
     ElemType e;
     Status result;
     do {
