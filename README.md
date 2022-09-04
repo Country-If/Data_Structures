@@ -25,3 +25,6 @@
 - stack
   - sequential stack [header file](Stack/SeqStack.h), [C source file](Stack/SeqStack.c)
   - linked stack (without a head node) [header file](Stack/LinkStack.h), [C source file](Stack/LinkStack.c)
+- queue
+    - sequential queue [header file](Queue/SeqQueue.h), [C source file](Queue/SeqQueue.c)
+    - linked queue (with a head node) [header file](Queue/LinkQueue.h), [C source file](Queue/LinkQueue.c)
