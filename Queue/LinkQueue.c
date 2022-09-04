@@ -4,10 +4,32 @@
 
 #include "LinkQueue.h"
 
-Status InitLinkQueue(LinkQueue *Q) {}
+Status InitLinkQueue(LinkQueue *Q) {
+    LinkQueueNode *q = (LinkQueueNode *) malloc(sizeof(LinkQueueNode));
+    if (q == NULL) {
+        return false;
+    }
+
+    q->next = NULL;
+    Q->front = Q->rear = q;
+    return true;
+}
 
 
-void DestroyLinkQueue(LinkQueue *Q) {}
+Status DestroyLinkQueue(LinkQueue *Q) {
+    if (Q == NULL) {
+        return false;
+    }
+
+    LinkQueueNode *p;
+    while (Q->front != NULL) {
+        p = Q->front;
+        Q->front = Q->front->next;
+        free(p);
+    }
+    Q->rear = NULL;
+    return true;
+}
 
 
 Status EnLinkQueue(LinkQueue *Q, ElemType e) {}
@@ -30,7 +52,7 @@ void LinkQueue_Traverse(LinkQueue Q, void(*visit)(ElemType e)) {}
 
 void linkqueue_menu(void) {
     int choice;
-    LinkQueue Q = NULL;
+    LinkQueue Q;
     ElemType e;
     Status result;
     do {
@@ -50,7 +72,7 @@ void linkqueue_menu(void) {
                 }
                 break;
             case 2:     // Destroy
-                if (Q == NULL) {
+                if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
                 else {
@@ -59,7 +81,7 @@ void linkqueue_menu(void) {
                 }
                 break;
             case 3:     // EnQueue
-                if (Q == NULL) {
+                if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
                 else {
@@ -75,7 +97,7 @@ void linkqueue_menu(void) {
                 }
                 break;
             case 4:     // DeQueue
-                if (Q == NULL) {
+                if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
                 else if (LinkQueue_Empty(Q) == true) {
@@ -92,7 +114,7 @@ void linkqueue_menu(void) {
                 }
                 break;
             case 5:     // Get head
-                if (Q == NULL) {
+                if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
                 else if (LinkQueue_Empty(Q) == true) {
@@ -104,7 +126,7 @@ void linkqueue_menu(void) {
                 }
                 break;
             case 6:     // Get length
-                if (Q == NULL) {
+                if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
                 else {
@@ -115,13 +137,13 @@ void linkqueue_menu(void) {
                 printf("Wrong input, please re-enter!\n");
                 break;
         }
-        if (choice >= 3 && choice <= 6 && Q != NULL) {
+        if (choice >= 3 && choice <= 6 && Q.front != NULL) {
             printf("Current queue (from front to rear): ");
             LinkQueue_Traverse(Q, visit);
         }
     } while (choice != 0);
     // release memory
-    if (Q != NULL) {
+    if (Q.front != NULL) {
         DestroyLinkQueue(&Q);
     }
 }

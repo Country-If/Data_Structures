@@ -10,7 +10,12 @@
 typedef struct LinkQueueNode {
     ElemType data;
     struct LinkQueueNode *next;
-} LinkQueueNode, *LinkQueue;
+} LinkQueueNode;
+
+typedef struct {
+    LinkQueueNode *front;
+    LinkQueueNode *rear;
+} LinkQueue;
 
 /* Create */
 /*!
@@ -24,8 +29,9 @@ Status InitLinkQueue(LinkQueue *Q);
 /*!
  * Destroy the linked queue (with a head)
  * @param Q : pointer to the linked queue
+ * @return status (true, false)
  */
-void DestroyLinkQueue(LinkQueue *Q);
+Status DestroyLinkQueue(LinkQueue *Q);
 
 /* EnQueue */
 /*!
