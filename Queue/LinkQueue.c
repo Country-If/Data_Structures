@@ -38,16 +38,27 @@ Status EnLinkQueue(LinkQueue *Q, ElemType e) {}
 Status DeLinkQueue(LinkQueue *Q, ElemType *e) {}
 
 
-void LinkQueue_Get_Head(LinkQueue Q, ElemType *e) {}
+void LinkQueue_Get_Head(LinkQueue *Q, ElemType *e) {}
 
 
-Status LinkQueue_Empty(LinkQueue Q) {}
+Status LinkQueue_Empty(LinkQueue *Q) {}
 
 
-int LinkQueue_Len(LinkQueue Q) {}
+int LinkQueue_Len(LinkQueue *Q) {}
 
 
-void LinkQueue_Traverse(LinkQueue Q, void(*visit)(ElemType e)) {}
+void LinkQueue_Traverse(LinkQueue *Q, void(*visit)(ElemType e)) {
+    if (Q->front == NULL) {
+        return;
+    }
+
+    LinkQueueNode *p = Q->front->next;
+    while (p != NULL) {
+        visit(p->data);
+        p = p->next;
+    }
+    printf("NULL\n");
+}
 
 
 void linkqueue_menu(void) {
@@ -100,7 +111,7 @@ void linkqueue_menu(void) {
                 if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
-                else if (LinkQueue_Empty(Q) == true) {
+                else if (LinkQueue_Empty(&Q) == true) {
                     printf("The stack is NULL!\n");
                 }
                 else {
@@ -117,11 +128,11 @@ void linkqueue_menu(void) {
                 if (Q.front == NULL) {
                     printf("The stack isn't initialized!\n");
                 }
-                else if (LinkQueue_Empty(Q) == true) {
+                else if (LinkQueue_Empty(&Q) == true) {
                     printf("The stack is NULL!\n");
                 }
                 else {
-                    LinkQueue_Get_Head(Q, &e);
+                    LinkQueue_Get_Head(&Q, &e);
                     printf("Stack Top data: %d\n", e);
                 }
                 break;
@@ -130,7 +141,7 @@ void linkqueue_menu(void) {
                     printf("The stack isn't initialized!\n");
                 }
                 else {
-                    printf("Stack length: %d\n", LinkQueue_Len(Q));
+                    printf("Stack length: %d\n", LinkQueue_Len(&Q));
                 }
                 break;
             default:
@@ -139,7 +150,7 @@ void linkqueue_menu(void) {
         }
         if (choice >= 3 && choice <= 6 && Q.front != NULL) {
             printf("Current queue (from front to rear): ");
-            LinkQueue_Traverse(Q, visit);
+            LinkQueue_Traverse(&Q, visit);
         }
     } while (choice != 0);
     // release memory

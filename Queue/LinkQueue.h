@@ -54,32 +54,32 @@ Status DeLinkQueue(LinkQueue *Q, ElemType *e);
 /* Retrieve */
 /*!
  * Get the head data of the linked queue (with a head)
- * @param Q : the linked queue
+ * @param Q : pointer to the linked queue
  * @param e : pointer to the head data
  */
-void LinkQueue_Get_Head(LinkQueue Q, ElemType *e);
+void LinkQueue_Get_Head(LinkQueue *Q, ElemType *e);
 
 /*!
  * Judge if the linked queue (with a head) is empty
- * @param Q : the linked queue
+ * @param Q : pointer to the linked queue
  * @return status (true, false)
  */
-Status LinkQueue_Empty(LinkQueue Q);
+Status LinkQueue_Empty(LinkQueue *Q);
 
 /*!
  * Get the length of the linked queue (with a head)
- * @param Q : the linked queue
+ * @param Q : pointer to the linked queue
  * @return the length of the queue
  */
-int LinkQueue_Len(LinkQueue Q);
+int LinkQueue_Len(LinkQueue *Q);
 
 /* Traverse */
 /*!
  * Traverse the linked queue (with a head)
- * @param Q : the linked queue
+ * @param Q : pointer to the linked queue
  * @param visit : function pointer to the function that prints the data of a node
  */
-void LinkQueue_Traverse(LinkQueue Q, void(*visit)(ElemType e));
+void LinkQueue_Traverse(LinkQueue *Q, void(*visit)(ElemType e));
 
 /*!
  * The linked queue (with a head) menu
