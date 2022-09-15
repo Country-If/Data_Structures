@@ -4,6 +4,7 @@
 #include "LinkList/LinkList.h"          // Linked List
 #include "Stack/Stack.h"                // Stack
 #include "Queue/Queue.h"                // Queue
+#include "String/String.h"              // String
 
 int main() {
     int choice;
@@ -26,10 +27,13 @@ int main() {
             case 4:     // queue
                 queue_menu();
                 break;
-            case 5:     // tree
+            case 5:     // string
+                string_menu();
+                break;
+            case 6:     // tree
 
                 break;
-            case 6:     // map
+            case 7:     // map
 
                 break;
             default:
@@ -131,11 +135,13 @@ void main_menu(void) {
     printf("\t*--------------------------------*\n");
     printf("\t*  4  |   Queue                  *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  5  |   Tree                   *\n");
+    printf("\t*  5  |   String                 *\n");
     printf("\t*--------------------------------*\n");
-    printf("\t*  6  |   Map                    *\n");
+    printf("\t*  6  |   Tree                   *\n");
+    printf("\t*--------------------------------*\n");
+    printf("\t*  7  |   Map                    *\n");
     printf("\t*--------------------------------*\n");
     printf("\t*  0  |   Exit                   *\n");
     printf("\t**********************************\n");
-    printf("\nPlease enter the corresponding number(0-6): ");
+    printf("\nPlease enter the corresponding number(0-7): ");
 }
