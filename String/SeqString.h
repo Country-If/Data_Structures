@@ -108,6 +108,13 @@ int SeqStringIndex(SString S, SString T);
 int SeqStringCompare(SString S, SString T);
 
 /*!
+ * Traverse the sequential string
+ * @param S : the sequential string
+ * @param print_string : function pointer to the function that prints a string
+ */
+void SeqString_Traverse(SString S, void(*print_string)(char *ch, int len));
+
+/*!
  * The sequential string menu
  */
 void seqstring_menu(void);

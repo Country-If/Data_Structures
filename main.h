@@ -29,6 +29,13 @@ typedef enum Status {
 void visit(ElemType e);
 
 /*!
+ * Print a string
+ * @param ch : pointer to the char sequence
+ * @param len : length of the char sequence
+ */
+void print_string(char *ch, int len);
+
+/*!
  * Get element from input
  * @param e : pointer to the element
  */

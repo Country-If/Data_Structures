@@ -4,7 +4,7 @@
 
 #include "String.h"
 #include "SeqString.h"      // sequential string
-#include "LinkString.h"     // linked string
+//#include "LinkString.h"     // linked string
 
 void string_menu(void) {
     int choice;
@@ -18,9 +18,9 @@ void string_menu(void) {
             case 1:     // sequential string
                 seqstring_menu();
                 break;
-            case 2:     // linked string
+//            case 2:     // linked string
 //                linkstring_menu();
-                break;
+//                break;
             default:
                 printf("Wrong input, please re-enter!\n");
                 break;
@@ -36,9 +36,9 @@ void string_menu_show_details(void) {
     printf("\t*------------------------------------------*\n");
     printf("\t*  1  |   Sequential string                *\n");
     printf("\t*------------------------------------------*\n");
-    printf("\t*  2  |   Linked string                    *\n");
+    printf("\t*  2  |   Linked string (Nothing)          *\n");
     printf("\t*------------------------------------------*\n");
     printf("\t*  0  |   Back                             *\n");
     printf("\t********************************************\n");
-    printf("\nPlease enter the corresponding number(0-2): ");
+    printf("\nPlease enter the corresponding number(0-1): ");
 }

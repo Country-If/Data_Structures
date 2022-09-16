@@ -56,6 +56,16 @@ void visit(ElemType e) {
 }
 
 
+void print_string(char *ch, int len) {
+    printf("\"");
+    for (int i = 1; i < len; i++) {
+        printf("%c", ch[i]);
+    }
+    printf("\"");
+    printf("\n");
+}
+
+
 void get_input_element(ElemType *e) {
     printf("Please input the data: ");
     if (sizeof((*e)) == sizeof(char)) {
